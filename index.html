@@ -1,0 +1,2142 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NUTIVA 3D Studio | PMV Final Validado - NutriPack Express</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-studio: #f7f8fa;
+      --panel-bg: rgba(255, 255, 255, 0.91);
+      --panel-border: rgba(30, 41, 59, 0.09);
+      --text-main: #18221b;
+      --text-muted: #5a685e;
+      --green-primary: #2e7d32;
+      --green-dark: #1b5e20;
+      --green-soft: #e8f5e9;
+      --kraft: #b99364;
+      --kraft-soft: #f5ede2;
+      --accent-orange: #e67e22;
+      --shadow-lg: 0 20px 45px -12px rgba(24, 34, 27, 0.15);
+      --shadow-sm: 0 4px 12px rgba(24, 34, 27, 0.06);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-studio);
+      color: var(--text-main);
+      overflow: hidden;
+      width: 100vw;
+      height: 100vh;
+      transition: background-color 0.45s ease;
+    }
+
+    #canvas-container {
+      position: fixed;
+      inset: 0;
+      z-index: 1;
+      cursor: grab;
+    }
+
+    #canvas-container:active {
+      cursor: grabbing;
+    }
+
+    /* Header Flotante */
+    .top-bar {
+      position: fixed;
+      top: 16px;
+      left: 20px;
+      right: 20px;
+      z-index: 10;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      pointer-events: none;
+    }
+
+    .brand-group {
+      pointer-events: auto;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .brand-badge {
+      background: var(--panel-bg);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid var(--panel-border);
+      padding: 9px 16px;
+      border-radius: 16px;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      align-items: center;
+      gap: 11px;
+    }
+
+    .brand-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #2e7d32, #43a047);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 800;
+      font-size: 18px;
+      box-shadow: 0 4px 10px rgba(46, 125, 50, 0.25);
+    }
+
+    .brand-title {
+      font-size: 15px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: var(--green-dark);
+      line-height: 1.1;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .mvp-tag {
+      font-size: 10px;
+      font-weight: 700;
+      background: var(--green-soft);
+      color: var(--green-dark);
+      padding: 2px 7px;
+      border-radius: 999px;
+      border: 1px solid rgba(46, 125, 50, 0.25);
+    }
+
+    .brand-sub {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    .direct-contact-pill {
+      background: #ffffff;
+      border: 1px solid rgba(46, 125, 50, 0.28);
+      padding: 8px 14px;
+      border-radius: 14px;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      color: var(--text-main);
+      transition: all 0.2s ease;
+    }
+
+    .direct-contact-pill:hover {
+      border-color: var(--green-primary);
+      transform: translateY(-1px);
+    }
+
+    .pulse-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #16a34a;
+      box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.2);
+    }
+
+    .studio-controls {
+      pointer-events: auto;
+      display: flex;
+      gap: 7px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .pill-btn {
+      background: var(--panel-bg);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid var(--panel-border);
+      padding: 8px 13px;
+      border-radius: 12px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-main);
+      cursor: pointer;
+      box-shadow: var(--shadow-sm);
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .pill-btn:hover {
+      transform: translateY(-1px);
+      border-color: rgba(46, 125, 50, 0.35);
+    }
+
+    .pill-btn.active {
+      background: var(--green-primary);
+      color: #fff;
+      border-color: var(--green-primary);
+    }
+
+    .swatch-dot {
+      width: 11px;
+      height: 11px;
+      border-radius: 50%;
+      border: 1px solid rgba(0,0,0,0.18);
+      display: inline-block;
+    }
+
+    /* Panel Lateral Izquierdo: Personalización */
+    .config-panel {
+      position: fixed;
+      top: 80px;
+      left: 20px;
+      bottom: 78px;
+      width: 340px;
+      z-index: 10;
+      background: var(--panel-bg);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--panel-border);
+      border-radius: 22px;
+      box-shadow: var(--shadow-lg);
+      padding: 18px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .config-panel::-webkit-scrollbar {
+      width: 5px;
+    }
+    .config-panel::-webkit-scrollbar-thumb {
+      background: rgba(0,0,0,0.14);
+      border-radius: 10px;
+    }
+
+    .section-label {
+      font-size: 10.5px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--text-muted);
+      margin-bottom: 7px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .new-badge {
+      background: #fef3c7;
+      color: #b45309;
+      font-size: 9.5px;
+      font-weight: 800;
+      padding: 2px 6px;
+      border-radius: 6px;
+      text-transform: uppercase;
+    }
+
+    .option-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 7px;
+    }
+
+    .option-card {
+      background: rgba(255, 255, 255, 0.8);
+      border: 1.5px solid rgba(24, 34, 27, 0.09);
+      border-radius: 12px;
+      padding: 9px 10px;
+      cursor: pointer;
+      text-align: left;
+      transition: all 0.2s ease;
+    }
+
+    .option-card:hover {
+      border-color: rgba(46, 125, 50, 0.4);
+      background: #fff;
+    }
+
+    .option-card.selected {
+      border-color: var(--green-primary);
+      background: var(--green-soft);
+      box-shadow: 0 3px 10px rgba(46, 125, 50, 0.12);
+    }
+
+    .option-title {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text-main);
+      display: block;
+      margin-bottom: 2px;
+    }
+
+    .option-desc {
+      font-size: 10.5px;
+      color: var(--text-muted);
+      line-height: 1.25;
+      display: block;
+    }
+
+    .option-list {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .option-row {
+      background: rgba(255, 255, 255, 0.8);
+      border: 1.5px solid rgba(24, 34, 27, 0.09);
+      border-radius: 12px;
+      padding: 8px 11px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: all 0.2s ease;
+    }
+
+    .option-row:hover {
+      border-color: rgba(46, 125, 50, 0.4);
+    }
+
+    .option-row.selected {
+      border-color: var(--green-primary);
+      background: var(--green-soft);
+    }
+
+    /* Switch Botella */
+    .toggle-box {
+      background: var(--kraft-soft);
+      border: 1px solid rgba(185, 147, 100, 0.35);
+      border-radius: 13px;
+      padding: 10px 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      cursor: pointer;
+    }
+
+    .switch {
+      position: relative;
+      width: 40px;
+      height: 22px;
+      background: #cbd5e1;
+      border-radius: 999px;
+      transition: background 0.25s ease;
+      flex-shrink: 0;
+    }
+
+    .switch::after {
+      content: '';
+      position: absolute;
+      top: 3px;
+      left: 3px;
+      width: 16px;
+      height: 16px;
+      background: #fff;
+      border-radius: 50%;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+      transition: transform 0.25s ease;
+    }
+
+    .toggle-box.active .switch {
+      background: var(--green-primary);
+    }
+
+    .toggle-box.active .switch::after {
+      transform: translateX(18px);
+    }
+
+    /* Panel Derecho: Nutrición, Planes y Recojo Express */
+    .nutri-panel {
+      position: fixed;
+      top: 80px;
+      right: 20px;
+      bottom: 78px;
+      width: 315px;
+      z-index: 10;
+      background: var(--panel-bg);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--panel-border);
+      border-radius: 22px;
+      box-shadow: var(--shadow-lg);
+      padding: 18px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .nutri-panel::-webkit-scrollbar {
+      width: 5px;
+    }
+    .nutri-panel::-webkit-scrollbar-thumb {
+      background: rgba(0,0,0,0.14);
+      border-radius: 10px;
+    }
+
+    .nutri-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 8px;
+    }
+
+    .price-tag {
+      background: var(--green-soft);
+      color: var(--green-dark);
+      font-weight: 800;
+      font-size: 16px;
+      padding: 5px 10px;
+      border-radius: 10px;
+      white-space: nowrap;
+      text-align: right;
+    }
+
+    .price-sub {
+      display: block;
+      font-size: 9.5px;
+      font-weight: 600;
+      color: var(--green-primary);
+    }
+
+    /* Selector Plan Individual vs Suscripción 5 días */
+    .plan-switcher {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px;
+      background: rgba(24, 34, 27, 0.05);
+      padding: 4px;
+      border-radius: 12px;
+    }
+
+    .plan-btn {
+      border: none;
+      background: transparent;
+      padding: 7px 8px;
+      border-radius: 9px;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.2s ease;
+    }
+
+    .plan-btn.active {
+      background: #ffffff;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+
+    .plan-btn strong {
+      display: block;
+      font-size: 11.5px;
+      color: var(--text-main);
+    }
+
+    .plan-btn span {
+      display: block;
+      font-size: 10px;
+      color: var(--green-primary);
+      font-weight: 700;
+    }
+
+    .stat-row {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .stat-top {
+      display: flex;
+      justify-content: space-between;
+      font-size: 11.5px;
+      font-weight: 600;
+    }
+
+    .progress-track {
+      height: 6px;
+      background: rgba(24, 34, 27, 0.08);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      border-radius: 999px;
+      transition: width 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .formula-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+    }
+
+    .f-badge {
+      font-size: 10px;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 7px;
+      background: #f1f5f9;
+      color: #334155;
+    }
+
+    .synergy-note {
+      background: #fffbeb;
+      border: 1px solid #fde68a;
+      border-radius: 11px;
+      padding: 9px 11px;
+      font-size: 11px;
+      line-height: 1.38;
+      color: #78350f;
+    }
+
+    .pickup-box {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .pickup-select {
+      width: 100%;
+      padding: 7px 9px;
+      border-radius: 8px;
+      border: 1px solid #cbd5e1;
+      font-size: 11.5px;
+      font-weight: 600;
+      color: var(--text-main);
+      background: #fff;
+    }
+
+    .cta-wa {
+      background: linear-gradient(135deg, #25d366, #128c7e);
+      color: #fff;
+      border: none;
+      border-radius: 13px;
+      padding: 12px 14px;
+      font-size: 12.5px;
+      font-weight: 800;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      box-shadow: 0 8px 20px rgba(37, 211, 102, 0.28);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      text-decoration: none;
+    }
+
+    .cta-wa:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 24px rgba(37, 211, 102, 0.36);
+    }
+
+    .info-link-btn {
+      background: transparent;
+      border: 1px dashed rgba(46, 125, 50, 0.45);
+      color: var(--green-dark);
+      border-radius: 10px;
+      padding: 7px 10px;
+      font-size: 11px;
+      font-weight: 700;
+      cursor: pointer;
+      text-align: center;
+      transition: background 0.2s ease;
+    }
+
+    .info-link-btn:hover {
+      background: var(--green-soft);
+    }
+
+    /* Barra Inferior de Vistas de Cámara */
+    .camera-dock {
+      position: fixed;
+      bottom: 16px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 10;
+      background: var(--panel-bg);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid var(--panel-border);
+      padding: 6px;
+      border-radius: 16px;
+      box-shadow: var(--shadow-lg);
+      display: flex;
+      gap: 5px;
+    }
+
+    .cam-btn {
+      background: transparent;
+      border: none;
+      padding: 7px 12px;
+      border-radius: 11px;
+      font-size: 11.5px;
+      font-weight: 600;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .cam-btn:hover {
+      color: var(--text-main);
+      background: rgba(0,0,0,0.04);
+    }
+
+    .cam-btn.active {
+      background: var(--text-main);
+      color: #fff;
+    }
+
+    /* Modal Ficha Técnica y Trazabilidad */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.45);
+      backdrop-filter: blur(6px);
+      z-index: 50;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .modal-backdrop.open {
+      display: flex;
+    }
+
+    .modal-card {
+      background: #fff;
+      border-radius: 22px;
+      max-width: 520px;
+      width: 100%;
+      padding: 24px;
+      box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25);
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .modal-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .modal-item {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 11px;
+    }
+
+    .modal-item h4 {
+      font-size: 12px;
+      color: var(--green-dark);
+      margin-bottom: 4px;
+    }
+
+    .modal-item p {
+      font-size: 11px;
+      color: var(--text-muted);
+      line-height: 1.35;
+    }
+
+    /* Loading Overlay */
+    #loader {
+      position: fixed;
+      inset: 0;
+      background: #f7f8fa;
+      z-index: 100;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      transition: opacity 0.4s ease;
+    }
+
+    .spinner {
+      width: 38px;
+      height: 38px;
+      border: 3.5px solid #e2e8f0;
+      border-top-color: #2e7d32;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .mobile-toggle {
+      display: none;
+    }
+
+    @media (max-width: 1120px) {
+      .direct-contact-pill {
+        display: none;
+      }
+      .config-panel {
+        width: 295px;
+      }
+      .nutri-panel {
+        width: 285px;
+      }
+    }
+
+    @media (max-width: 820px) {
+      .mobile-toggle {
+        display: flex;
+      }
+      .config-panel {
+        left: 12px;
+        right: 12px;
+        width: auto;
+        top: auto;
+        bottom: 70px;
+        max-height: 55vh;
+        transform: translateY(130%);
+      }
+      .config-panel.open {
+        transform: translateY(0);
+      }
+      .nutri-panel {
+        display: none;
+      }
+      .nutri-panel.mobile-show {
+        display: flex;
+        left: 12px;
+        right: 12px;
+        width: auto;
+        top: auto;
+        bottom: 70px;
+        max-height: 60vh;
+      }
+      .camera-dock {
+        bottom: 12px;
+        max-width: 95vw;
+        overflow-x: auto;
+      }
+    }
+  </style>
+
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+      }
+    }
+  </script>
+</head>
+<body>
+
+  <div id="loader">
+    <div class="spinner"></div>
+    <div style="font-weight:700; font-size:14px; color:#1b5e20;">Cargando PMV Final de NUTIVA 3D...</div>
+  </div>
+
+  <!-- Barra Superior -->
+  <header class="top-bar">
+    <div class="brand-group">
+      <div class="brand-badge">
+        <div class="brand-icon">N</div>
+        <div>
+          <div class="brand-title">
+            NUTIVA 3D Studio
+            <span class="mvp-tag">PMV Final Validado</span>
+          </div>
+          <div class="brand-sub">NutriPack Express • Empaque con identidad y trazabilidad</div>
+        </div>
+      </div>
+
+      <a href="https://wa.me/51964812340?text=Hola%20NUTIVA,%20quisiera%20hacer%20un%20pedido%20express%20en%20campus" target="_blank" class="direct-contact-pill" title="Contacto directo y recojo inmediato en campus">
+        <span class="pulse-dot"></span>
+        <div>
+          <div style="font-size:11.5px; font-weight:800; color:#18221b;">📞 +51 964 812 340</div>
+          <div style="font-size:10px; font-weight:600; color:#2e7d32;">Recojo Express Campus (10-15 min)</div>
+        </div>
+      </a>
+    </div>
+
+    <div class="studio-controls">
+      <button class="pill-btn active" id="btn-bg-white">
+        <span class="swatch-dot" style="background:#f7f8fa;"></span> Blanco
+      </button>
+      <button class="pill-btn" id="btn-bg-cream">
+        <span class="swatch-dot" style="background:#f4ede2;"></span> Crema
+      </button>
+      <button class="pill-btn" id="btn-lid">
+        📦 Cerrar Caja (Ver Logo Exterior)
+      </button>
+      <button class="pill-btn mobile-toggle" id="btn-mobile-config">
+        🎨 Personalizar
+      </button>
+      <button class="pill-btn mobile-toggle" id="btn-mobile-nutri">
+        📊 Pedir / Plan
+      </button>
+    </div>
+  </header>
+
+  <!-- Panel Izquierdo: Personalizador PMV Final -->
+  <aside class="config-panel" id="config-panel">
+    <div>
+      <div class="section-label">
+        <span>1. Forma de Galletas (Izquierda)</span>
+        <span class="new-badge">Nuevo PMV</span>
+      </div>
+      <div class="option-grid" id="shape-options">
+        <div class="option-card selected" data-shape="heart">
+          <span class="option-title">❤️ Corazón</span>
+          <span class="option-desc">Diseño lúdico y masa suave</span>
+        </div>
+        <div class="option-card" data-shape="round">
+          <span class="option-title">🍪 Rústica</span>
+          <span class="option-desc">Redonda artesanal clásica</span>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="section-label">
+        <span>2. Catálogo Frutas Deshidratadas (Der.)</span>
+        <span class="new-badge">Ampliado</span>
+      </div>
+      <div class="option-grid" id="fruit-options">
+        <div class="option-card selected" data-mix="fresa_papaya">
+          <span class="option-title">Fresa & Papaya</span>
+          <span class="option-desc">Fresa, mango, papaya y pasas</span>
+        </div>
+        <div class="option-card" data-mix="citrico_pina">
+          <span class="option-title">Piña & Naranja</span>
+          <span class="option-desc">Piña dorada, naranja y mango</span>
+        </div>
+        <div class="option-card" data-mix="energia">
+          <span class="option-title">Mix Energía</span>
+          <span class="option-desc">Plátano, mango, aguaymanto</span>
+        </div>
+        <div class="option-card" data-mix="hierro">
+          <span class="option-title">Hierro Plus</span>
+          <span class="option-desc">Fresa, aguaymanto y papaya</span>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="section-label">
+        <span>3. Topping Galletas Sangrecita</span>
+      </div>
+      <div class="option-list" id="topping-options">
+        <div class="option-row selected" data-topping="avena">
+          <div>
+            <span class="option-title">Avena Suave Reformulada</span>
+            <span class="option-desc">Textura tierna • Dulzor bajo validado</span>
+          </div>
+          <span>🌾</span>
+        </div>
+        <div class="option-row" data-topping="cacao">
+          <div>
+            <span class="option-title">Chispas de Cacao 70%</span>
+            <span class="option-desc">Cacao puro de Satipo antioxidante</span>
+          </div>
+          <span>🍫</span>
+        </div>
+        <div class="option-row" data-topping="semillas">
+          <div>
+            <span class="option-title">Semillas Andinas</span>
+            <span class="option-desc">Ajonjolí tostado y chía orgánica</span>
+          </div>
+          <span>✨</span>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="section-label">
+        <span>4. Sello Interior de Caja</span>
+      </div>
+      <div class="option-list" id="edition-options">
+        <div class="option-row selected" data-edition="clasica">
+          <span class="option-title">NUTRIPACK EXPRESS</span>
+          <span class="option-desc">Marca + QR</span>
+        </div>
+        <div class="option-row" data-edition="origen">
+          <span class="option-title">ORIGEN 100% ARTESANAL</span>
+          <span class="option-desc">Trazabilidad</span>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="section-label">
+        <span>5. Bebida Complementaria</span>
+      </div>
+      <div class="toggle-box" id="drink-toggle">
+        <div>
+          <span class="option-title">Infusión Aguaymanto & Camu</span>
+          <span class="option-desc">Potencia fijación de hierro (+S/ 2.50)</span>
+        </div>
+        <div class="switch"></div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Panel Derecho: Planes, Nutrición y Pedido Inmediato WhatsApp -->
+  <aside class="nutri-panel" id="nutri-panel">
+    <div class="nutri-header">
+      <div>
+        <div style="font-size:10.5px; font-weight:700; color:var(--green-primary); text-transform:uppercase;">Configuración PMV Final</div>
+        <div style="font-size:15px; font-weight:800; line-height:1.2;" id="nutri-title">Fresa & Papaya + Avena</div>
+      </div>
+      <div class="price-tag">
+        <span id="price-display">S/ 5.00</span>
+        <span class="price-sub" id="price-sub">Pack Individual</span>
+      </div>
+    </div>
+
+    <!-- Selector de Plan Individual vs Suscripción Semanal 5 Días -->
+    <div class="plan-switcher" id="plan-switcher">
+      <button class="plan-btn active" data-plan="individual">
+        <strong>Pack Diario</strong>
+        <span>S/ 5.00 • 1 día</span>
+      </button>
+      <button class="plan-btn" data-plan="semanal">
+        <strong>Plan Semanal (5d)</strong>
+        <span>S/ 24.00 (S/ 4.80/d)</span>
+      </button>
+    </div>
+
+    <div class="formula-badges">
+      <span class="f-badge">✓ Masa suave</span>
+      <span class="f-badge">✓ Bajo en azúcar</span>
+      <span class="f-badge">✓ Insumos propios</span>
+    </div>
+
+    <div class="stat-row">
+      <div class="stat-top">
+        <span>Hierro Hemínico (Anti-anemia)</span>
+        <span id="iron-val" style="color:#b91c1c; font-weight:700;">48% VDR</span>
+      </div>
+      <div class="progress-track">
+        <div class="progress-fill" id="iron-bar" style="width: 48%; background: #dc2626;"></div>
+      </div>
+    </div>
+
+    <div class="stat-row">
+      <div class="stat-top">
+        <span>Vitamina C (Fijador de Hierro)</span>
+        <span id="vitc-val" style="color:#d97706; font-weight:700;">78% VDR</span>
+      </div>
+      <div class="progress-track">
+        <div class="progress-fill" id="vitc-bar" style="width: 78%; background: #f59e0b;"></div>
+      </div>
+    </div>
+
+    <div class="stat-row">
+      <div class="stat-top">
+        <span>Energía Académica Sostenida</span>
+        <span id="energy-val" style="color:#2e7d32; font-weight:700;">315 kcal (3h)</span>
+      </div>
+      <div class="progress-track">
+        <div class="progress-fill" id="energy-bar" style="width: 72%; background: #2e7d32;"></div>
+      </div>
+    </div>
+
+    <div class="synergy-note" id="synergy-text">
+      💡 <strong>Mejora PMV:</strong> Galletas suaves en forma de corazón con fresa y papaya deshidratada artesanalmente en Huancayo.
+    </div>
+
+    <!-- Logística de Recojo Rápido en Campus -->
+    <div class="pickup-box">
+      <div style="font-size:11px; font-weight:800; color:#1e293b; display:flex; justify-content:space-between;">
+        <span>⚡ Recojo Express en Campus</span>
+        <span style="color:#16a34a;">10 - 15 min</span>
+      </div>
+      <select class="pickup-select" id="pickup-point">
+        <option value="Puerta Principal - Universidad Continental">📍 Puerta Principal - Univ. Continental</option>
+        <option value="Cafetería Central / Patio Campus">📍 Cafetería Central / Patio Campus</option>
+        <option value="Pabellón de Ingeniería (Receso)">📍 Pabellón de Ingeniería (Receso)</option>
+      </select>
+    </div>
+
+    <a href="#" target="_blank" class="cta-wa" id="wa-order-btn">
+      <span>📲 Pedir por WhatsApp Express</span>
+    </a>
+
+    <button class="info-link-btn" id="btn-open-traceability">
+      🔍 Ver Origen de Insumos y Ficha por Paquete
+    </button>
+  </aside>
+
+  <!-- Dock Inferior de Vistas -->
+  <nav class="camera-dock">
+    <button class="cam-btn active" data-view="hero">Vista General</button>
+    <button class="cam-btn" data-view="logo">Logo Exterior</button>
+    <button class="cam-btn" data-view="cookies">Galletas Corazón</button>
+    <button class="cam-btn" data-view="fruits">Frutas (Der.)</button>
+    <button class="cam-btn" data-view="top">Vista Superior</button>
+    <button class="cam-btn" id="btn-autorotate">🔄 Auto-Giro</button>
+  </nav>
+
+  <!-- Modal de Transparencia y Ficha Técnica por Paquete -->
+  <div class="modal-backdrop" id="traceability-modal">
+    <div class="modal-card">
+      <div style="display:flex; justify-content:space-between; align-items:center;">
+        <div>
+          <span class="mvp-tag">Transparencia y Calidad NUTIVA</span>
+          <h3 style="font-size:18px; font-weight:800; margin-top:4px;">Origen de Insumos y Logística Express</h3>
+        </div>
+        <button id="btn-close-modal" style="border:none; background:#f1f5f9; width:32px; height:32px; border-radius:50%; font-weight:800; cursor:pointer;">✕</button>
+      </div>
+
+      <div class="modal-grid">
+        <div class="modal-item">
+          <h4>🍪 Galletas de Sangrecita</h4>
+          <p><strong>Elaboración propia:</strong> Horneado diario en lotes frescos con masa de avena reformulada para mayor suavidad y bajo nivel de azúcar.</p>
+        </div>
+        <div class="modal-item">
+          <h4>🍍 Frutas Deshidratadas</h4>
+          <p><strong>100 % Naturales:</strong> Fresa, papaya, piña, naranja y aguaymanto seleccionados de productores del Valle del Mantaro y Satipo, sin conservantes.</p>
+        </div>
+        <div class="modal-item">
+          <h4>🍫 Chispas y Semillas</h4>
+          <p><strong>Origen trazable:</strong> Cacao puro al 70 % de la selva central (Satipo) y semillas andinas tostadas artesanalmente.</p>
+        </div>
+        <div class="modal-item">
+          <h4>⚡ Recojo en 10-15 Minutos</h4>
+          <p><strong>Stock listo en campus:</strong> Al pedir por WhatsApp (+51 964 812 340), asignamos tu pack armado y lo recoges sin filas en tu pabellón.</p>
+        </div>
+      </div>
+
+      <div style="background:var(--green-soft); padding:11px 13px; border-radius:12px; font-size:11.5px; color:var(--green-dark); font-weight:600;">
+        📦 <strong>Identidad y Sostenibilidad:</strong> Empaque de cartón kraft grado alimenticio 100 % biodegradable con logotipo exterior NUTIVA y código QR de pedido directo.
+      </div>
+    </div>
+  </div>
+
+  <div id="canvas-container"></div>
+
+  <script type="module">
+    import * as THREE from 'three';
+    import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+    import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+
+    // --- ESCENA Y RENDERER HDRI ---
+    const container = document.getElementById('canvas-container');
+    const scene = new THREE.Scene();
+    scene.background = new THREE.Color(0xf7f8fa);
+
+    const camera = new THREE.PerspectiveCamera(38, window.innerWidth / window.innerHeight, 0.1, 100);
+    camera.position.set(0.3, 4.6, 5.4);
+
+    const renderer = new THREE.WebGLRenderer({ antialias: true, powerPreference: 'high-performance' });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.shadowMap.enabled = true;
+    renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1.05;
+    container.appendChild(renderer.domElement);
+
+    const pmremGenerator = new THREE.PMREMGenerator(renderer);
+    scene.environment = pmremGenerator.fromScene(new RoomEnvironment(), 0.04).texture;
+
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.38);
+    scene.add(ambientLight);
+
+    const keyLight = new THREE.DirectionalLight(0xfffcf5, 1.35);
+    keyLight.position.set(4.5, 8.5, 5.0);
+    keyLight.castShadow = true;
+    keyLight.shadow.mapSize.width = 2048;
+    keyLight.shadow.mapSize.height = 2048;
+    keyLight.shadow.camera.near = 1;
+    keyLight.shadow.camera.far = 22;
+    const d = 4.2;
+    keyLight.shadow.camera.left = -d;
+    keyLight.shadow.camera.right = d;
+    keyLight.shadow.camera.top = d;
+    keyLight.shadow.camera.bottom = -d;
+    keyLight.shadow.bias = -0.0005;
+    scene.add(keyLight);
+
+    const fillLight = new THREE.DirectionalLight(0xeef6ff, 0.58);
+    fillLight.position.set(-5.0, 4.0, -3.5);
+    scene.add(fillLight);
+
+    const controls = new OrbitControls(camera, renderer.domElement);
+    controls.enableDamping = true;
+    controls.dampingFactor = 0.06;
+    controls.minDistance = 2.4;
+    controls.maxDistance = 10.5;
+    controls.maxPolarAngle = Math.PI / 2 - 0.04;
+    controls.target.set(0, 0.45, 0);
+
+    const floor = new THREE.Mesh(
+      new THREE.PlaneGeometry(30, 30),
+      new THREE.ShadowMaterial({ opacity: 0.14 })
+    );
+    floor.rotation.x = -Math.PI / 2;
+    floor.receiveShadow = true;
+    scene.add(floor);
+
+    // --- GENERADORES DE TEXTURAS PBR PROCEDURALES ---
+    function createNoiseCanvas(width, height, baseRGB, variance, fiberCount = 0) {
+      const canvas = document.createElement('canvas');
+      canvas.width = width;
+      canvas.height = height;
+      const ctx = canvas.getContext('2d');
+      const imgData = ctx.createImageData(width, height);
+      const data = imgData.data;
+
+      for (let i = 0; i < data.length; i += 4) {
+        const n = (Math.random() - 0.5) * variance;
+        data[i] = Math.min(255, Math.max(0, baseRGB[0] + n));
+        data[i + 1] = Math.min(255, Math.max(0, baseRGB[1] + n));
+        data[i + 2] = Math.min(255, Math.max(0, baseRGB[2] + n));
+        data[i + 3] = 255;
+      }
+      ctx.putImageData(imgData, 0, 0);
+
+      for (let f = 0; f < fiberCount; f++) {
+        ctx.strokeStyle = Math.random() > 0.5 ? 'rgba(65, 42, 20, 0.14)' : 'rgba(245, 225, 195, 0.14)';
+        ctx.lineWidth = Math.random() * 1.4 + 0.4;
+        ctx.beginPath();
+        const x = Math.random() * width;
+        const y = Math.random() * height;
+        ctx.moveTo(x, y);
+        ctx.lineTo(x + (Math.random() - 0.5) * 18, y + (Math.random() - 0.5) * 18);
+        ctx.stroke();
+      }
+      return canvas;
+    }
+
+    const kraftColorTex = new THREE.CanvasTexture(createNoiseCanvas(512, 512, [186, 148, 102], 22, 900));
+    kraftColorTex.colorSpace = THREE.SRGBColorSpace;
+    const kraftBumpTex = new THREE.CanvasTexture(createNoiseCanvas(512, 512, [128, 128, 128], 55, 1100));
+
+    const kraftMaterial = new THREE.MeshStandardMaterial({
+      map: kraftColorTex,
+      bumpMap: kraftBumpTex,
+      bumpScale: 0.015,
+      roughness: 0.86,
+      metalness: 0.02
+    });
+
+    // --- TEXTURA EXTERIOR DE LA TAPA CON LOGO OFICIAL NUTIVA + TRAZABILIDAD ---
+    function createOuterLidTexture() {
+      const canvas = document.createElement('canvas');
+      canvas.width = 1024;
+      canvas.height = 680;
+      const ctx = canvas.getContext('2d');
+
+      ctx.drawImage(kraftColorTex.image, 0, 0, 1024, 680);
+
+      // Doble marco ecológico impreso en tinta verde bosque
+      ctx.strokeStyle = '#1b5e20';
+      ctx.lineWidth = 8;
+      ctx.strokeRect(36, 36, 952, 608);
+
+      ctx.strokeStyle = 'rgba(27, 94, 32, 0.35)';
+      ctx.lineWidth = 3;
+      ctx.strokeRect(52, 52, 920, 576);
+
+      // Emblema circular central suave
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.24)';
+      ctx.beginPath();
+      ctx.ellipse(512, 295, 340, 175, 0, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Hojas decorativas sobre la I de NUTIVA
+      ctx.fillStyle = '#2e7d32';
+      ctx.beginPath();
+      ctx.ellipse(552, 168, 28, 13, -Math.PI / 5, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.fillStyle = '#43a047';
+      ctx.beginPath();
+      ctx.ellipse(592, 174, 23, 10, Math.PI / 4, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Logotipo principal NUTIVA
+      ctx.fillStyle = '#1b5e20';
+      ctx.font = '800 132px "Plus Jakarta Sans", sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText('NUTIVA', 512, 290);
+
+      // Cinta verde con nombre del producto
+      ctx.fillStyle = '#1b5e20';
+      ctx.beginPath();
+      ctx.roundRect(272, 322, 480, 52, 26);
+      ctx.fill();
+
+      ctx.fillStyle = '#ffffff';
+      ctx.font = '800 26px "Plus Jakarta Sans", sans-serif';
+      ctx.fillText('NUTRIPACK EXPRESS • PMV FINAL', 512, 357);
+
+      // Sellos de transparencia y origen natural
+      ctx.fillStyle = '#261e16';
+      ctx.font = '700 24px "Plus Jakarta Sans", sans-serif';
+      ctx.fillText('Galletas de Sangrecita + Frutas Deshidratadas Naturales', 512, 432);
+
+      ctx.fillStyle = '#1b5e20';
+      ctx.font = '700 20px "Plus Jakarta Sans", sans-serif';
+      ctx.fillText('100 % Insumos Artesanales de Huancayo • Bajo en Azúcar • Biodegradable', 512, 476);
+
+      // Pie de contacto rápido
+      ctx.fillStyle = '#3b2f24';
+      ctx.font = '600 20px "Plus Jakarta Sans", sans-serif';
+      ctx.fillText('Pedidos Express WhatsApp: +51 964 812 340 • Campus UC', 512, 578);
+
+      const tex = new THREE.CanvasTexture(canvas);
+      tex.colorSpace = THREE.SRGBColorSpace;
+      return tex;
+    }
+
+    const lidOuterMat = new THREE.MeshStandardMaterial({
+      map: createOuterLidTexture(),
+      bumpMap: kraftBumpTex,
+      bumpScale: 0.012,
+      roughness: 0.82
+    });
+
+    // --- TEXTURA FRONTAL EXTERIOR DE LA CAJA (BRANDING VISIBLE DE FRENTE) ---
+    function createFrontWallTexture() {
+      const canvas = document.createElement('canvas');
+      canvas.width = 1024;
+      canvas.height = 240;
+      const ctx = canvas.getContext('2d');
+
+      ctx.drawImage(kraftColorTex.image, 0, 0, 1024, 240);
+
+      ctx.strokeStyle = 'rgba(27, 94, 32, 0.45)';
+      ctx.lineWidth = 6;
+      ctx.strokeRect(18, 18, 988, 204);
+
+      ctx.fillStyle = '#1b5e20';
+      ctx.font = '800 72px "Plus Jakarta Sans", sans-serif';
+      ctx.textAlign = 'left';
+      ctx.fillText('NUTIVA', 54, 142);
+
+      ctx.fillStyle = '#2b241d';
+      ctx.font = '700 28px "Plus Jakarta Sans", sans-serif';
+      ctx.textAlign = 'right';
+      ctx.fillText('NutriPack Express • Snack Rico en Hierro', 968, 112);
+
+      ctx.fillStyle = '#1b5e20';
+      ctx.font = '600 23px "Plus Jakarta Sans", sans-serif';
+      ctx.fillText('100 % Natural & Biodegradable • Huancayo', 968, 152);
+
+      const tex = new THREE.CanvasTexture(canvas);
+      tex.colorSpace = THREE.SRGBColorSpace;
+      return tex;
+    }
+
+    const frontWallBrandingMat = new THREE.MeshStandardMaterial({
+      map: createFrontWallTexture(),
+      bumpMap: kraftBumpTex,
+      bumpScale: 0.012,
+      roughness: 0.84
+    });
+
+    // --- TEXTURA INTERIOR DE LA TAPA ---
+    function createLidInnerTexture(subtitleText) {
+      const canvas = document.createElement('canvas');
+      canvas.width = 1024;
+      canvas.height = 680;
+      const ctx = canvas.getContext('2d');
+
+      ctx.drawImage(kraftColorTex.image, 0, 0, 1024, 680);
+
+      ctx.strokeStyle = 'rgba(46, 125, 50, 0.28)';
+      ctx.lineWidth = 6;
+      ctx.strokeRect(42, 42, 940, 596);
+
+      ctx.fillStyle = '#2e7d32';
+      ctx.beginPath();
+      ctx.ellipse(548, 145, 24, 11, -Math.PI / 5, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.fillStyle = '#43a047';
+      ctx.beginPath();
+      ctx.ellipse(582, 150, 20, 9, Math.PI / 4, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.fillStyle = '#24582a';
+      ctx.font = '800 104px "Plus Jakarta Sans", sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText('NUTIVA', 512, 248);
+
+      ctx.fillStyle = '#2b241d';
+      ctx.font = '700 30px "Plus Jakarta Sans", sans-serif';
+      ctx.fillText(subtitleText, 512, 302);
+
+      // QR Code
+      const qrSize = 152;
+      const qrX = 512 - qrSize / 2;
+      const qrY = 338;
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.65)';
+      ctx.fillRect(qrX - 10, qrY - 10, qrSize + 20, qrSize + 20);
+
+      ctx.fillStyle = '#1f2922';
+      const cells = 11;
+      const step = qrSize / cells;
+      for (let r = 0; r < cells; r++) {
+        for (let c = 0; c < cells; c++) {
+          const isCorner = (r < 3 && c < 3) || (r < 3 && c > 7) || (r > 7 && c < 3);
+          if (isCorner || ((r * 7 + c * 13) % 3 === 0)) {
+            ctx.fillRect(qrX + c * step + 1, qrY + r * step + 1, step - 2, step - 2);
+          }
+        }
+      }
+
+      ctx.fillStyle = '#2b241d';
+      ctx.font = '700 23px "Plus Jakarta Sans", sans-serif';
+      ctx.fillText('WhatsApp Express: +51 964 812 340 • Recojo en 10 min', 512, 542);
+
+      ctx.fillStyle = '#24582a';
+      ctx.font = '600 19px "Plus Jakarta Sans", sans-serif';
+      ctx.fillText('Insumos Naturales de Huancayo • Empaque 100% Biodegradable', 512, 582);
+
+      const tex = new THREE.CanvasTexture(canvas);
+      tex.colorSpace = THREE.SRGBColorSpace;
+      return tex;
+    }
+
+    let lidInnerMat = new THREE.MeshStandardMaterial({
+      map: createLidInnerTexture('NUTRIPACK EXPRESS • RECOJO RÁPIDO'),
+      bumpMap: kraftBumpTex,
+      bumpScale: 0.012,
+      roughness: 0.84
+    });
+
+    // Texturas Galleta y Papel
+    const cookieColorTex = new THREE.CanvasTexture(createNoiseCanvas(512, 512, [82, 49, 35], 30, 400));
+    cookieColorTex.colorSpace = THREE.SRGBColorSpace;
+    const cookieBumpTex = new THREE.CanvasTexture(createNoiseCanvas(512, 512, [128, 128, 128], 85, 600));
+
+    const cookieMaterial = new THREE.MeshStandardMaterial({
+      map: cookieColorTex,
+      bumpMap: cookieBumpTex,
+      bumpScale: 0.028,
+      roughness: 0.88,
+      metalness: 0.01
+    });
+
+    const paperBumpTex = new THREE.CanvasTexture(createNoiseCanvas(256, 256, [128, 128, 128], 40, 200));
+    const parchmentMaterial = new THREE.MeshStandardMaterial({
+      color: 0xf6f0e4,
+      bumpMap: paperBumpTex,
+      bumpScale: 0.018,
+      roughness: 0.72,
+      metalness: 0.0,
+      transparent: true,
+      opacity: 0.93,
+      side: THREE.DoubleSide
+    });
+
+    // --- CONSTRUCCIÓN DE LA CAJA BIODEGRADABLE CON IDENTIDAD VISUAL ---
+    const boxGroup = new THREE.Group();
+    scene.add(boxGroup);
+
+    const W = 3.2;
+    const D = 2.15;
+    const H = 0.62;
+    const T = 0.045;
+
+    const baseMesh = new THREE.Mesh(new THREE.BoxGeometry(W, T, D), kraftMaterial);
+    baseMesh.position.y = T / 2;
+    baseMesh.castShadow = true;
+    baseMesh.receiveShadow = true;
+    boxGroup.add(baseMesh);
+
+    // Pared frontal con logotipo NUTIVA visible al frente (+Z es índice 4)
+    const frontWall = new THREE.Mesh(
+      new THREE.BoxGeometry(W, H, T),
+      [kraftMaterial, kraftMaterial, kraftMaterial, kraftMaterial, frontWallBrandingMat, kraftMaterial]
+    );
+    frontWall.position.set(0, H / 2, D / 2 - T / 2);
+    frontWall.castShadow = true;
+    frontWall.receiveShadow = true;
+    boxGroup.add(frontWall);
+
+    const backWall = new THREE.Mesh(new THREE.BoxGeometry(W, H, T), kraftMaterial);
+    backWall.position.set(0, H / 2, -D / 2 + T / 2);
+    backWall.castShadow = true;
+    backWall.receiveShadow = true;
+    boxGroup.add(backWall);
+
+    const leftWall = new THREE.Mesh(new THREE.BoxGeometry(T, H, D - T * 2), kraftMaterial);
+    leftWall.position.set(-W / 2 + T / 2, H / 2, 0);
+    leftWall.castShadow = true;
+    leftWall.receiveShadow = true;
+    boxGroup.add(leftWall);
+
+    const rightWall = new THREE.Mesh(new THREE.BoxGeometry(T, H, D - T * 2), kraftMaterial);
+    rightWall.position.set(W / 2 - T / 2, H / 2, 0);
+    rightWall.castShadow = true;
+    rightWall.receiveShadow = true;
+    boxGroup.add(rightWall);
+
+    // Separador central
+    const divider = new THREE.Mesh(new THREE.BoxGeometry(T * 0.9, H * 0.94, D - T * 2), kraftMaterial);
+    divider.position.set(0, H * 0.47, 0);
+    divider.castShadow = true;
+    divider.receiveShadow = true;
+    boxGroup.add(divider);
+
+    function createLiner(centerX) {
+      const linerGroup = new THREE.Group();
+      linerGroup.position.set(centerX, T + 0.005, 0);
+
+      const bottomPaper = new THREE.Mesh(new THREE.PlaneGeometry(W / 2 - T * 1.6, D - T * 2.2), parchmentMaterial);
+      bottomPaper.rotation.x = -Math.PI / 2;
+      bottomPaper.receiveShadow = true;
+      linerGroup.add(bottomPaper);
+
+      const flapGeo = new THREE.PlaneGeometry(D - T * 2.4, 0.72, 16, 6);
+      const pos = flapGeo.attributes.position;
+      for (let i = 0; i < pos.count; i++) {
+        const x = pos.getX(i);
+        const y = pos.getY(i);
+        if (y > 0) {
+          pos.setZ(i, Math.sin(x * 7.5) * 0.025 + Math.cos(y * 9) * 0.015);
+        }
+      }
+      flapGeo.computeVertexNormals();
+
+      const flap = new THREE.Mesh(flapGeo, parchmentMaterial);
+      const sideSign = centerX < 0 ? -1 : 1;
+      flap.position.set(sideSign * (W / 4 - T * 0.8), 0.34, 0);
+      flap.rotation.y = sideSign * (Math.PI / 2);
+      flap.rotation.x = sideSign * 0.16;
+      flap.castShadow = true;
+      linerGroup.add(flap);
+
+      return linerGroup;
+    }
+
+    boxGroup.add(createLiner(-W / 4));
+    boxGroup.add(createLiner(W / 4));
+
+    // Tapa Abatible: +Y (índice 2) lleva el LOGO EXTERIOR; -Y (índice 3) lleva el LOGO INTERIOR + QR
+    const lidPivot = new THREE.Group();
+    lidPivot.position.set(0, H, -D / 2 + T / 2);
+    boxGroup.add(lidPivot);
+
+    const lidPanel = new THREE.Mesh(
+      new THREE.BoxGeometry(W, T * 0.85, D),
+      [kraftMaterial, kraftMaterial, lidOuterMat, lidInnerMat, kraftMaterial, kraftMaterial]
+    );
+    lidPanel.position.set(0, 0, D / 2);
+    lidPanel.castShadow = true;
+    lidPanel.receiveShadow = true;
+    lidPivot.add(lidPanel);
+
+    const tuckFlap = new THREE.Mesh(new THREE.BoxGeometry(W - T * 2, 0.24, T * 0.75), kraftMaterial);
+    tuckFlap.position.set(0, -0.12, D - T * 0.4);
+    tuckFlap.castShadow = true;
+    lidPivot.add(tuckFlap);
+
+    let targetLidAngle = -1.78;
+    lidPivot.rotation.x = targetLidAngle;
+
+    // --- GALLETAS EN FORMA DE CORAZÓN (NUEVO PMV) Y REDONDAS ---
+    const cookiesGroup = new THREE.Group();
+    boxGroup.add(cookiesGroup);
+
+    function createHeartCookieGeometry() {
+      const heartShape = new THREE.Shape();
+      const x = 0, y = 0;
+      heartShape.moveTo(x, y + 0.11);
+      heartShape.bezierCurveTo(x, y + 0.11, x - 0.05, y + 0.25, x - 0.18, y + 0.25);
+      heartShape.bezierCurveTo(x - 0.35, y + 0.25, x - 0.35, y + 0.04, x - 0.35, y + 0.04);
+      heartShape.bezierCurveTo(x - 0.35, y - 0.12, x - 0.18, y - 0.25, x, y - 0.36);
+      heartShape.bezierCurveTo(x + 0.18, y - 0.25, x + 0.35, y - 0.12, x + 0.35, y + 0.04);
+      heartShape.bezierCurveTo(x + 0.35, y + 0.04, x + 0.35, y + 0.25, x + 0.18, y + 0.25);
+      heartShape.bezierCurveTo(x + 0.05, y + 0.25, x, y + 0.11, x, y + 0.11);
+
+      const extrudeSettings = {
+        depth: 0.075,
+        bevelEnabled: true,
+        bevelSegments: 4,
+        steps: 1,
+        bevelSize: 0.028,
+        bevelThickness: 0.028
+      };
+
+      const geo = new THREE.ExtrudeGeometry(heartShape, extrudeSettings);
+      geo.rotateX(-Math.PI / 2);
+      geo.center();
+
+      // Suave textura orgánica de masa horneada
+      const pos = geo.attributes.position;
+      for (let i = 0; i < pos.count; i++) {
+        const vx = pos.getX(i);
+        const vy = pos.getY(i);
+        const vz = pos.getZ(i);
+        pos.setY(i, vy + (Math.random() - 0.5) * 0.005);
+        pos.setX(i, vx + Math.sin(vz * 18) * 0.004);
+      }
+      geo.computeVertexNormals();
+      return geo;
+    }
+
+    function createRoundCookieGeometry(radius, height) {
+      const geo = new THREE.CylinderGeometry(radius, radius * 1.04, height, 32, 4);
+      const pos = geo.attributes.position;
+      for (let i = 0; i < pos.count; i++) {
+        const vx = pos.getX(i);
+        const vy = pos.getY(i);
+        const vz = pos.getZ(i);
+        const angle = Math.atan2(vz, vx);
+        const dist = Math.sqrt(vx * vx + vz * vz);
+
+        const edgeNoise = Math.sin(angle * 5) * 0.015 + Math.cos(angle * 9) * 0.01 + (Math.random() - 0.5) * 0.007;
+        if (dist > radius * 0.35) {
+          pos.setX(i, vx + Math.cos(angle) * edgeNoise);
+          pos.setZ(i, vz + Math.sin(angle) * edgeNoise);
+        }
+        if (vy > 0) {
+          const dome = Math.cos((dist / radius) * (Math.PI / 2)) * 0.032;
+          pos.setY(i, vy + dome + (Math.random() - 0.5) * 0.005);
+        }
+      }
+      geo.computeVertexNormals();
+      return geo;
+    }
+
+    const toppingMaterials = {
+      avena: new THREE.MeshStandardMaterial({ color: 0xe8d5b5, roughness: 0.8 }),
+      semillas: new THREE.MeshStandardMaterial({ color: 0xf4e4c1, roughness: 0.6 }),
+      cacao: new THREE.MeshStandardMaterial({ color: 0x26140e, roughness: 0.35 })
+    };
+
+    function buildCookies(toppingType, shapeType) {
+      while (cookiesGroup.children.length > 0) {
+        cookiesGroup.remove(cookiesGroup.children[0]);
+      }
+
+      const positions = [
+        { x: -1.12, y: 0.14, z: -0.52, rx: 0.04, ry: 0.18, rz: -0.05 },
+        { x: -0.45, y: 0.14, z: -0.48, rx: -0.04, ry: -0.22, rz: 0.06 },
+        { x: -1.10, y: 0.15, z: 0.18, rx: 0.07, ry: -0.15, rz: -0.04 },
+        { x: -0.44, y: 0.15, z: 0.22, rx: -0.05, ry: 0.25, rz: 0.06 },
+        { x: -0.82, y: 0.28, z: -0.16, rx: 0.14, ry: 0.08, rz: -0.10 },
+        { x: -0.78, y: 0.27, z: 0.55, rx: -0.16, ry: -0.12, rz: 0.09 }
+      ];
+
+      positions.forEach((p) => {
+        const singleCookie = new THREE.Group();
+        const geo = shapeType === 'heart'
+          ? createHeartCookieGeometry()
+          : createRoundCookieGeometry(0.31, 0.11);
+
+        const mesh = new THREE.Mesh(geo, cookieMaterial);
+        mesh.castShadow = true;
+        mesh.receiveShadow = true;
+        singleCookie.add(mesh);
+
+        const count = toppingType === 'semillas' ? 22 : 14;
+        const topMat = toppingMaterials[toppingType];
+        const maxR = shapeType === 'heart' ? 0.15 : 0.22;
+
+        for (let t = 0; t < count; t++) {
+          let tGeo;
+          if (toppingType === 'avena') {
+            tGeo = new THREE.BoxGeometry(0.052, 0.012, 0.030);
+          } else if (toppingType === 'semillas') {
+            tGeo = new THREE.SphereGeometry(0.014, 6, 6);
+            tGeo.scale(1.4, 0.6, 0.9);
+          } else {
+            tGeo = new THREE.ConeGeometry(0.023, 0.028, 8);
+          }
+
+          const tMesh = new THREE.Mesh(tGeo, topMat);
+          const r = Math.sqrt(Math.random()) * maxR;
+          const theta = Math.random() * Math.PI * 2;
+          tMesh.position.set(Math.cos(theta) * r, 0.066, Math.sin(theta) * r - (shapeType === 'heart' ? 0.03 : 0));
+          tMesh.rotation.set((Math.random() - 0.5) * 0.4, Math.random() * Math.PI, (Math.random() - 0.5) * 0.4);
+          singleCookie.add(tMesh);
+        }
+
+        singleCookie.position.set(p.x, p.y, p.z);
+        singleCookie.rotation.set(p.rx, shapeType === 'heart' ? p.ry : Math.random() * Math.PI, p.rz);
+        cookiesGroup.add(singleCookie);
+      });
+    }
+
+    // --- FRUTAS DESHIDRATADAS AMPLIADAS (PAPAYA, PIÑA, NARANJA, FRESA, MANGO, PLÁTANO) ---
+    const fruitsGroup = new THREE.Group();
+    boxGroup.add(fruitsGroup);
+
+    // Textura radial para rodaja de naranja deshidratada
+    function createOrangeSliceTexture() {
+      const c = document.createElement('canvas');
+      c.width = 256;
+      c.height = 256;
+      const ctx = c.getContext('2d');
+      ctx.fillStyle = '#ea580c';
+      ctx.fillRect(0, 0, 256, 256);
+
+      ctx.strokeStyle = '#fed7aa';
+      ctx.lineWidth = 10;
+      ctx.beginPath();
+      ctx.arc(128, 128, 112, 0, Math.PI * 2);
+      ctx.stroke();
+
+      ctx.lineWidth = 5;
+      for (let i = 0; i < 8; i++) {
+        const ang = (i * Math.PI) / 4;
+        ctx.beginPath();
+        ctx.moveTo(128, 128);
+        ctx.lineTo(128 + Math.cos(ang) * 112, 128 + Math.sin(ang) * 112);
+        ctx.stroke();
+      }
+      const tex = new THREE.CanvasTexture(c);
+      tex.colorSpace = THREE.SRGBColorSpace;
+      return tex;
+    }
+
+    const fruitMaterials = {
+      banana: new THREE.MeshStandardMaterial({
+        color: 0xf4e1b6,
+        bumpMap: cookieBumpTex,
+        bumpScale: 0.008,
+        roughness: 0.58
+      }),
+      mango: new THREE.MeshPhysicalMaterial({
+        color: 0xf59e0b,
+        bumpMap: kraftBumpTex,
+        bumpScale: 0.014,
+        roughness: 0.42,
+        clearcoat: 0.25
+      }),
+      papaya: new THREE.MeshPhysicalMaterial({
+        color: 0xe85d2a,
+        bumpMap: cookieBumpTex,
+        bumpScale: 0.018,
+        roughness: 0.38,
+        clearcoat: 0.32
+      }),
+      pina: new THREE.MeshPhysicalMaterial({
+        color: 0xfacc15,
+        bumpMap: kraftBumpTex,
+        bumpScale: 0.02,
+        roughness: 0.45,
+        clearcoat: 0.2
+      }),
+      naranja: new THREE.MeshStandardMaterial({
+        map: createOrangeSliceTexture(),
+        bumpMap: cookieBumpTex,
+        bumpScale: 0.015,
+        roughness: 0.5
+      }),
+      aguaymanto: new THREE.MeshPhysicalMaterial({
+        color: 0xd96612,
+        bumpMap: cookieBumpTex,
+        bumpScale: 0.025,
+        roughness: 0.36,
+        clearcoat: 0.35
+      }),
+      pasa: new THREE.MeshPhysicalMaterial({
+        color: 0x331d27,
+        bumpMap: cookieBumpTex,
+        bumpScale: 0.028,
+        roughness: 0.32,
+        clearcoat: 0.4
+      }),
+      fresa: new THREE.MeshPhysicalMaterial({
+        color: 0xc81e32,
+        bumpMap: cookieBumpTex,
+        bumpScale: 0.015,
+        roughness: 0.46,
+        clearcoat: 0.24
+      })
+    };
+
+    function createFruitMesh(type) {
+      if (type === 'banana') {
+        const geo = new THREE.CylinderGeometry(0.18, 0.18, 0.028, 22);
+        const pos = geo.attributes.position;
+        for (let i = 0; i < pos.count; i++) {
+          const x = pos.getX(i), z = pos.getZ(i);
+          pos.setY(i, pos.getY(i) + (x * x + z * z) * 0.45);
+        }
+        geo.computeVertexNormals();
+        const m = new THREE.Mesh(geo, fruitMaterials.banana);
+        m.castShadow = true;
+        return m;
+      }
+      if (type === 'mango') {
+        const geo = new THREE.BoxGeometry(0.38, 0.026, 0.14, 10, 2, 4);
+        const pos = geo.attributes.position;
+        for (let i = 0; i < pos.count; i++) {
+          const x = pos.getX(i), z = pos.getZ(i);
+          pos.setY(i, pos.getY(i) + Math.sin(x * 11) * 0.024 + z * 0.12);
+        }
+        geo.computeVertexNormals();
+        const m = new THREE.Mesh(geo, fruitMaterials.mango);
+        m.castShadow = true;
+        return m;
+      }
+      if (type === 'papaya') {
+        const geo = new THREE.BoxGeometry(0.32, 0.036, 0.13, 8, 2, 4);
+        const pos = geo.attributes.position;
+        for (let i = 0; i < pos.count; i++) {
+          const x = pos.getX(i);
+          pos.setY(i, pos.getY(i) + Math.cos(x * 9) * 0.018);
+        }
+        geo.computeVertexNormals();
+        const m = new THREE.Mesh(geo, fruitMaterials.papaya);
+        m.castShadow = true;
+        return m;
+      }
+      if (type === 'pina') {
+        const geo = new THREE.CylinderGeometry(0.21, 0.21, 0.028, 20, 1, false, 0, Math.PI * 1.25);
+        const m = new THREE.Mesh(geo, fruitMaterials.pina);
+        m.castShadow = true;
+        return m;
+      }
+      if (type === 'naranja') {
+        const geo = new THREE.CylinderGeometry(0.20, 0.20, 0.024, 24);
+        const m = new THREE.Mesh(geo, fruitMaterials.naranja);
+        m.castShadow = true;
+        return m;
+      }
+      if (type === 'aguaymanto') {
+        const geo = new THREE.SphereGeometry(0.105, 16, 14);
+        const pos = geo.attributes.position;
+        for (let i = 0; i < pos.count; i++) {
+          const x = pos.getX(i), y = pos.getY(i), z = pos.getZ(i);
+          const wrinkle = 1 + Math.sin(x * 35) * 0.06 + Math.cos(z * 35) * 0.06;
+          pos.setXYZ(i, x * wrinkle, y * 0.78 * wrinkle, z * wrinkle);
+        }
+        geo.computeVertexNormals();
+        const m = new THREE.Mesh(geo, fruitMaterials.aguaymanto);
+        m.castShadow = true;
+        return m;
+      }
+      if (type === 'pasa') {
+        const geo = new THREE.SphereGeometry(0.065, 12, 10);
+        geo.scale(1.35, 0.75, 0.85);
+        const m = new THREE.Mesh(geo, fruitMaterials.pasa);
+        m.castShadow = true;
+        return m;
+      }
+      if (type === 'fresa') {
+        const geo = new THREE.CylinderGeometry(0.16, 0.16, 0.024, 18);
+        geo.scale(1.15, 1, 0.88);
+        const m = new THREE.Mesh(geo, fruitMaterials.fresa);
+        m.castShadow = true;
+        return m;
+      }
+    }
+
+    const fruitMixConfigs = {
+      fresa_papaya: ['fresa', 'papaya', 'mango', 'pasa'],
+      citrico_pina: ['pina', 'naranja', 'mango', 'aguaymanto'],
+      energia: ['banana', 'mango', 'aguaymanto', 'pasa'],
+      hierro: ['fresa', 'aguaymanto', 'papaya', 'pasa']
+    };
+
+    function buildFruits(mixKey) {
+      while (fruitsGroup.children.length > 0) {
+        fruitsGroup.remove(fruitsGroup.children[0]);
+      }
+
+      const types = fruitMixConfigs[mixKey];
+      const slots = [
+        { x: 0.48, y: 0.11, z: -0.52, typeIdx: 0 },
+        { x: 0.72, y: 0.13, z: -0.45, typeIdx: 0 },
+        { x: 0.52, y: 0.15, z: -0.24, typeIdx: 0 },
+        { x: 0.78, y: 0.16, z: -0.22, typeIdx: 0 },
+        { x: 0.62, y: 0.19, z: -0.36, typeIdx: 0 },
+        { x: 1.12, y: 0.12, z: -0.32, typeIdx: 1 },
+        { x: 1.15, y: 0.15, z: 0.05, typeIdx: 1 },
+        { x: 1.08, y: 0.18, z: 0.34, typeIdx: 1 },
+        { x: 1.14, y: 0.21, z: -0.08, typeIdx: 1 },
+        { x: 0.36, y: 0.14, z: 0.34, typeIdx: 2 },
+        { x: 0.54, y: 0.14, z: 0.42, typeIdx: 2 },
+        { x: 0.42, y: 0.15, z: 0.58, typeIdx: 2 },
+        { x: 0.60, y: 0.15, z: 0.62, typeIdx: 2 },
+        { x: 0.48, y: 0.23, z: 0.46, typeIdx: 2 },
+        { x: 0.82, y: 0.11, z: 0.48, typeIdx: 3 },
+        { x: 0.94, y: 0.11, z: 0.56, typeIdx: 3 },
+        { x: 0.86, y: 0.12, z: 0.66, typeIdx: 3 },
+        { x: 0.98, y: 0.12, z: 0.42, typeIdx: 3 },
+        { x: 0.88, y: 0.16, z: 0.54, typeIdx: 3 },
+        { x: 0.78, y: 0.15, z: 0.60, typeIdx: 3 }
+      ];
+
+      slots.forEach((s) => {
+        const fruitType = types[s.typeIdx % types.length];
+        const mesh = createFruitMesh(fruitType);
+        mesh.position.set(s.x, s.y, s.z);
+        mesh.rotation.set(
+          (Math.random() - 0.5) * 0.4,
+          Math.random() * Math.PI * 2,
+          (Math.random() - 0.5) * 0.4
+        );
+        fruitsGroup.add(mesh);
+      });
+    }
+
+    // --- BOTELLA DE BEBIDA NATURAL OPCIONAL ---
+    const bottleGroup = new THREE.Group();
+    bottleGroup.position.set(2.35, 0, -0.15);
+    bottleGroup.visible = false;
+    bottleGroup.scale.set(0.01, 0.01, 0.01);
+    scene.add(bottleGroup);
+
+    const glassMat = new THREE.MeshPhysicalMaterial({
+      color: 0xffffff,
+      transmission: 0.85,
+      opacity: 1,
+      transparent: true,
+      roughness: 0.12,
+      ior: 1.48,
+      thickness: 0.15
+    });
+
+    const liquidMat = new THREE.MeshPhysicalMaterial({
+      color: 0xf39c12,
+      roughness: 0.15,
+      transmission: 0.55,
+      transparent: true,
+      opacity: 0.88
+    });
+
+    const bottleBody = new THREE.Mesh(new THREE.CylinderGeometry(0.36, 0.38, 1.45, 28), glassMat);
+    bottleBody.position.y = 0.74;
+    bottleBody.castShadow = true;
+    bottleGroup.add(bottleBody);
+
+    const liquidMesh = new THREE.Mesh(new THREE.CylinderGeometry(0.33, 0.35, 1.25, 24), liquidMat);
+    liquidMesh.position.y = 0.66;
+    bottleGroup.add(liquidMesh);
+
+    const neckMesh = new THREE.Mesh(new THREE.CylinderGeometry(0.16, 0.34, 0.42, 24), glassMat);
+    neckMesh.position.y = 1.66;
+    bottleGroup.add(neckMesh);
+
+    const capMesh = new THREE.Mesh(new THREE.CylinderGeometry(0.18, 0.18, 0.18, 24), kraftMaterial);
+    capMesh.position.y = 1.94;
+    capMesh.castShadow = true;
+    bottleGroup.add(capMesh);
+
+    const labelMesh = new THREE.Mesh(
+      new THREE.CylinderGeometry(0.384, 0.384, 0.52, 28, 1, true),
+      lidInnerMat
+    );
+    labelMesh.position.y = 0.75;
+    labelMesh.rotation.y = -Math.PI / 2.2;
+    bottleGroup.add(labelMesh);
+
+    // Inicializar por defecto con las mejoras del PMV Final
+    buildCookies('avena', 'heart');
+    buildFruits('fresa_papaya');
+
+    // --- ESTADO DE LA APLICACIÓN ---
+    const state = {
+      shape: 'heart',
+      mix: 'fresa_papaya',
+      topping: 'avena',
+      edition: 'clasica',
+      plan: 'individual',
+      drink: false,
+      lidOpen: true,
+      autoRotate: false
+    };
+
+    const nutritionData = {
+      fresa_papaya: {
+        name: 'Fresa & Papaya',
+        iron: 48,
+        vitc: 78,
+        kcal: '315 kcal (3h)',
+        energyPct: 74,
+        note: '💡 <strong>Mejora PMV:</strong> Galletas suaves en forma de corazón con fresa, mango y papaya deshidratada artesanalmente.'
+      },
+      citrico_pina: {
+        name: 'Piña & Naranja',
+        iron: 46,
+        vitc: 92,
+        kcal: '310 kcal (3h)',
+        energyPct: 72,
+        note: '🍊 <strong>Sinergia Cítrica:</strong> La piña y naranja deshidratadas aportan Vitamina C natural para multiplicar la absorción del hierro.'
+      },
+      energia: {
+        name: 'Mix Energía',
+        iron: 45,
+        vitc: 62,
+        kcal: '325 kcal (3.5h)',
+        energyPct: 78,
+        note: '⚡ <strong>Clásico Validado:</strong> Plátano, mango y aguaymanto con nivel de azúcar bajo validado para jornadas universitarias.'
+      },
+      hierro: {
+        name: 'Hierro Plus',
+        iron: 55,
+        vitc: 88,
+        kcal: '300 kcal (3h)',
+        energyPct: 70,
+        note: '🩸 <strong>Máxima Fijación:</strong> Combinación de aguaymanto, fresa y papaya para prevenir la fatiga y anemia estudiantil.'
+      }
+    };
+
+    const toppingNames = { avena: 'Avena Suave', cacao: 'Cacao 70%', semillas: 'Semillas' };
+    const shapeNames = { heart: 'Corazón', round: 'Rústica' };
+
+    function updateUI() {
+      const info = nutritionData[state.mix];
+      const extraIron = state.drink ? 5 : 0;
+      const extraVitC = state.drink ? 12 : 0;
+      const totalIron = Math.min(100, info.iron + extraIron);
+      const totalVitC = Math.min(100, info.vitc + extraVitC);
+
+      // Cálculo de precios (S/ 5.00 - S/ 5.50 individual o Plan Semanal 5 días)
+      const baseUnit = state.topping === 'cacao' ? 5.50 : 5.00;
+      const unitWithDrink = baseUnit + (state.drink ? 2.50 : 0);
+
+      let priceText, priceSubText;
+      if (state.plan === 'individual') {
+        priceText = `S/ ${unitWithDrink.toFixed(2)}`;
+        priceSubText = 'Pack Individual';
+      } else {
+        const weeklyTotal = (unitWithDrink * 5) - 1.00;
+        priceText = `S/ ${weeklyTotal.toFixed(2)}`;
+        priceSubText = `5 días (S/ ${(weeklyTotal / 5).toFixed(2)}/día)`;
+      }
+
+      document.getElementById('nutri-title').textContent = `${info.name} + ${toppingNames[state.topping]}`;
+      document.getElementById('price-display').textContent = priceText;
+      document.getElementById('price-sub').textContent = priceSubText;
+      document.getElementById('iron-val').textContent = `${totalIron}% VDR`;
+      document.getElementById('iron-bar').style.width = `${totalIron}%`;
+      document.getElementById('vitc-val').textContent = `${totalVitC}% VDR`;
+      document.getElementById('vitc-bar').style.width = `${totalVitC}%`;
+      document.getElementById('energy-val').textContent = state.drink ? '360 kcal (3.5h)' : info.kcal;
+      document.getElementById('energy-bar').style.width = `${state.drink ? 86 : info.energyPct}%`;
+      document.getElementById('synergy-text').innerHTML = info.note;
+
+      const pickup = document.getElementById('pickup-point').value;
+      const planLabel = state.plan === 'individual' ? 'Pack Individual (Hoy)' : 'Plan Suscripción Semanal (5 días Lun-Vie)';
+
+      const msg = encodeURIComponent(
+        `¡Hola NUTIVA! Quiero hacer un pedido express (PMV Final):\n` +
+        `• Modalidad: ${planLabel}\n` +
+        `• Galletas Sangrecita: Forma ${shapeNames[state.shape]} (${toppingNames[state.topping]})\n` +
+        `• Frutas Deshidratadas: ${info.name}\n` +
+        `• Bebida Natural: ${state.drink ? 'Sí (Infusión Aguaymanto & Camu)' : 'No'}\n` +
+        `• Punto de Recojo Campus (10-15 min): ${pickup}\n` +
+        `• Total: ${priceText}`
+      );
+      document.getElementById('wa-order-btn').href = `https://wa.me/51964812340?text=${msg}`;
+    }
+
+    // Eventos Forma de Galletas
+    document.querySelectorAll('#shape-options .option-card').forEach((card) => {
+      card.addEventListener('click', () => {
+        document.querySelectorAll('#shape-options .option-card').forEach(c => c.classList.remove('selected'));
+        card.classList.add('selected');
+        state.shape = card.dataset.shape;
+        buildCookies(state.topping, state.shape);
+        updateUI();
+      });
+    });
+
+    // Eventos Frutas
+    document.querySelectorAll('#fruit-options .option-card').forEach((card) => {
+      card.addEventListener('click', () => {
+        document.querySelectorAll('#fruit-options .option-card').forEach(c => c.classList.remove('selected'));
+        card.classList.add('selected');
+        state.mix = card.dataset.mix;
+        buildFruits(state.mix);
+        updateUI();
+      });
+    });
+
+    // Eventos Toppings
+    document.querySelectorAll('#topping-options .option-row').forEach((row) => {
+      row.addEventListener('click', () => {
+        document.querySelectorAll('#topping-options .option-row').forEach(r => r.classList.remove('selected'));
+        row.classList.add('selected');
+        state.topping = row.dataset.topping;
+        buildCookies(state.topping, state.shape);
+        updateUI();
+      });
+    });
+
+    // Eventos Sello Interior
+    const editionLabels = {
+      clasica: 'NUTRIPACK EXPRESS • RECOJO RÁPIDO',
+      origen: '100% ARTESANAL • ORIGEN HUANCAYO'
+    };
+
+    document.querySelectorAll('#edition-options .option-row').forEach((row) => {
+      row.addEventListener('click', () => {
+        document.querySelectorAll('#edition-options .option-row').forEach(r => r.classList.remove('selected'));
+        row.classList.add('selected');
+        state.edition = row.dataset.edition;
+        lidInnerMat.map = createLidInnerTexture(editionLabels[state.edition]);
+        lidInnerMat.needsUpdate = true;
+      });
+    });
+
+    // Eventos Plan Individual vs Semanal 5 días
+    document.querySelectorAll('#plan-switcher .plan-btn').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('#plan-switcher .plan-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        state.plan = btn.dataset.plan;
+        updateUI();
+      });
+    });
+
+    document.getElementById('pickup-point').addEventListener('change', updateUI);
+
+    // Toggle Bebida
+    const drinkToggle = document.getElementById('drink-toggle');
+    drinkToggle.addEventListener('click', () => {
+      state.drink = !state.drink;
+      drinkToggle.classList.toggle('active', state.drink);
+      if (state.drink) bottleGroup.visible = true;
+      updateUI();
+    });
+
+    // Fondos Estudio
+    const btnWhite = document.getElementById('btn-bg-white');
+    const btnCream = document.getElementById('btn-bg-cream');
+    btnWhite.addEventListener('click', () => {
+      scene.background = new THREE.Color(0xf7f8fa);
+      document.body.style.backgroundColor = '#f7f8fa';
+      btnWhite.classList.add('active');
+      btnCream.classList.remove('active');
+    });
+    btnCream.addEventListener('click', () => {
+      scene.background = new THREE.Color(0xf4ede2);
+      document.body.style.backgroundColor = '#f4ede2';
+      btnCream.classList.add('active');
+      btnWhite.classList.remove('active');
+    });
+
+    // Abrir / Cerrar Tapa
+    const btnLid = document.getElementById('btn-lid');
+    function setLidState(open) {
+      state.lidOpen = open;
+      targetLidAngle = state.lidOpen ? -1.78 : 0.015;
+      btnLid.textContent = state.lidOpen ? '📦 Cerrar Caja (Ver Logo Exterior)' : '📂 Abrir Caja';
+    }
+    btnLid.addEventListener('click', () => setLidState(!state.lidOpen));
+
+    // Vistas de Cámara
+    let targetCamPos = null;
+    let targetLookAt = null;
+
+    const cameraPresets = {
+      hero: { pos: new THREE.Vector3(0.3, 4.6, 5.4), target: new THREE.Vector3(0, 0.45, 0) },
+      logo: { pos: new THREE.Vector3(0.15, 3.8, 3.6), target: new THREE.Vector3(0, 0.45, 0), closeLid: true },
+      cookies: { pos: new THREE.Vector3(-1.35, 3.0, 2.35), target: new THREE.Vector3(-0.78, 0.25, 0), openLid: true },
+      fruits: { pos: new THREE.Vector3(1.45, 3.0, 2.35), target: new THREE.Vector3(0.78, 0.25, 0), openLid: true },
+      top: { pos: new THREE.Vector3(0, 5.8, 0.4), target: new THREE.Vector3(0, 0.3, -0.1) }
+    };
+
+    document.querySelectorAll('.cam-btn[data-view]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.cam-btn[data-view]').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const preset = cameraPresets[btn.dataset.view];
+        if (preset.closeLid) setLidState(false);
+        if (preset.openLid) setLidState(true);
+        targetCamPos = preset.pos.clone();
+        targetLookAt = preset.target.clone();
+      });
+    });
+
+    const btnAutoRotate = document.getElementById('btn-autorotate');
+    btnAutoRotate.addEventListener('click', () => {
+      state.autoRotate = !state.autoRotate;
+      controls.autoRotate = state.autoRotate;
+      controls.autoRotateSpeed = 1.6;
+      btnAutoRotate.classList.toggle('active', state.autoRotate);
+    });
+
+    // Modal de Trazabilidad
+    const modal = document.getElementById('traceability-modal');
+    document.getElementById('btn-open-traceability').addEventListener('click', () => modal.classList.add('open'));
+    document.getElementById('btn-close-modal').addEventListener('click', () => modal.classList.remove('open'));
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) modal.classList.remove('open');
+    });
+
+    // Controles móviles
+    document.getElementById('btn-mobile-config').addEventListener('click', () => {
+      document.getElementById('config-panel').classList.toggle('open');
+      document.getElementById('nutri-panel').classList.remove('mobile-show');
+    });
+    document.getElementById('btn-mobile-nutri').addEventListener('click', () => {
+      document.getElementById('nutri-panel').classList.toggle('mobile-show');
+      document.getElementById('config-panel').classList.remove('open');
+    });
+
+    window.addEventListener('resize', () => {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+
+    updateUI();
+    setTimeout(() => {
+      const loader = document.getElementById('loader');
+      loader.style.opacity = '0';
+      setTimeout(() => loader.remove(), 400);
+    }, 350);
+
+    function animate() {
+      requestAnimationFrame(animate);
+
+      lidPivot.rotation.x += (targetLidAngle - lidPivot.rotation.x) * 0.1;
+
+      const targetScale = state.drink ? 1 : 0.01;
+      bottleGroup.scale.lerp(new THREE.Vector3(targetScale, targetScale, targetScale), 0.12);
+      if (!state.drink && bottleGroup.scale.x < 0.03) {
+        bottleGroup.visible = false;
+      }
+
+      if (targetCamPos && targetLookAt) {
+        camera.position.lerp(targetCamPos, 0.08);
+        controls.target.lerp(targetLookAt, 0.08);
+        if (camera.position.distanceTo(targetCamPos) < 0.04) {
+          targetCamPos = null;
+          targetLookAt = null;
+        }
+      }
+
+      controls.update();
+      renderer.render(scene, camera);
+    }
+
+    animate();
+  </script>
+</body>
+</html>
