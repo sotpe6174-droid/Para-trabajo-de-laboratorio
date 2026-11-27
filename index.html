@@ -2,78 +2,74 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>NUTIVA 3D Studio | PMV Final Validado - NutriPack Express</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
-    /* Variables base: Fondo Blanco + Tema Verde Hoja (por defecto) */
     :root {
+      /* Variables de Fondo (Blanco por defecto) */
       --bg-studio: #f7f8fa;
-      --panel-bg: rgba(255, 255, 255, 0.92);
+      --panel-bg: rgba(255, 255, 255, 0.94);
       --panel-solid: #ffffff;
-      --card-bg: rgba(255, 255, 255, 0.85);
-      --card-subtle: #f1f5f9;
-      --panel-border: rgba(24, 34, 27, 0.10);
+      --card-bg: rgba(248, 250, 252, 0.92);
+      --panel-border: rgba(30, 41, 59, 0.11);
       --text-main: #18221b;
       --text-muted: #5a685e;
       --shadow-lg: 0 20px 45px -12px rgba(24, 34, 27, 0.16);
-      --shadow-sm: 0 4px 12px rgba(24, 34, 27, 0.06);
+      --shadow-sm: 0 4px 12px rgba(24, 34, 27, 0.07);
 
-      /* Acento Verde Hoja (Claro) */
-      --accent: #2e7d32;
+      /* Variables de Tema / Fuentes (Verde Hoja por defecto) */
+      --accent-primary: #2e7d32;
       --accent-dark: #1b5e20;
       --accent-soft: #e8f5e9;
       --accent-border: rgba(46, 125, 50, 0.35);
-      --accent-on: #ffffff;
-      --note-bg: #fffbeb;
-      --note-border: #fde68a;
-      --note-text: #78350f;
+      --accent-glow: rgba(46, 125, 50, 0.16);
+      --accent-gradient: linear-gradient(135deg, #2e7d32, #43a047);
     }
 
-    /* Fondo Oscuro Grafito */
-    body[data-bg="dark"] {
-      --bg-studio: #121513;
-      --panel-bg: rgba(24, 29, 26, 0.92);
-      --panel-solid: #1a201d;
-      --card-bg: rgba(33, 40, 36, 0.88);
-      --card-subtle: #242c27;
-      --panel-border: rgba(255, 255, 255, 0.11);
-      --text-main: #f1f5f9;
-      --text-muted: #9ca8a0;
-      --shadow-lg: 0 22px 48px -12px rgba(0, 0, 0, 0.55);
+    /* Fondo Oscuro */
+    body.bg-dark {
+      --bg-studio: #111513;
+      --panel-bg: rgba(24, 30, 27, 0.93);
+      --panel-solid: #181e1b;
+      --card-bg: rgba(33, 41, 37, 0.92);
+      --panel-border: rgba(255, 255, 255, 0.12);
+      --text-main: #f1f5f3;
+      --text-muted: #9fb0a6;
+      --shadow-lg: 0 22px 50px -12px rgba(0, 0, 0, 0.65);
       --shadow-sm: 0 4px 14px rgba(0, 0, 0, 0.35);
-      --note-bg: rgba(245, 158, 11, 0.12);
-      --note-border: rgba(245, 158, 11, 0.32);
-      --note-text: #fde68a;
     }
 
-    /* Tema Verde Hoja en Fondo Oscuro */
-    body[data-bg="dark"][data-theme="green"] {
-      --accent: #4ade80;
+    /* Tema Verde Hoja sobre Fondo Oscuro */
+    body.bg-dark.theme-leaf {
+      --accent-primary: #4ade80;
       --accent-dark: #86efac;
-      --accent-soft: rgba(74, 222, 128, 0.14);
+      --accent-soft: rgba(74, 222, 128, 0.15);
       --accent-border: rgba(74, 222, 128, 0.42);
-      --accent-on: #0b1910;
+      --accent-glow: rgba(74, 222, 128, 0.18);
+      --accent-gradient: linear-gradient(135deg, #16a34a, #22c55e);
     }
 
-    /* Tema Otoño Cálido en Fondo Blanco */
-    body[data-bg="light"][data-theme="autumn"] {
-      --accent: #c2410c;
+    /* Tema Otoño Cálido sobre Fondo Blanco */
+    body.theme-autumn {
+      --accent-primary: #c2410c;
       --accent-dark: #9a3412;
-      --accent-soft: #ffedd5;
+      --accent-soft: #fff7ed;
       --accent-border: rgba(194, 65, 12, 0.35);
-      --accent-on: #ffffff;
+      --accent-glow: rgba(194, 65, 12, 0.15);
+      --accent-gradient: linear-gradient(135deg, #c2410c, #ea580c);
     }
 
-    /* Tema Otoño Cálido en Fondo Oscuro */
-    body[data-bg="dark"][data-theme="autumn"] {
-      --accent: #fb923c;
+    /* Tema Otoño Cálido sobre Fondo Oscuro */
+    body.bg-dark.theme-autumn {
+      --accent-primary: #fb923c;
       --accent-dark: #fdba74;
-      --accent-soft: rgba(251, 146, 60, 0.15);
-      --accent-border: rgba(251, 146, 60, 0.42);
-      --accent-on: #1c1008;
+      --accent-soft: rgba(251, 146, 60, 0.16);
+      --accent-border: rgba(251, 146, 60, 0.45);
+      --accent-glow: rgba(251, 146, 60, 0.2);
+      --accent-gradient: linear-gradient(135deg, #ea580c, #f97316);
     }
 
     * {
@@ -89,23 +85,23 @@
       overflow: hidden;
       width: 100vw;
       height: 100vh;
+      height: 100dvh;
       transition: background-color 0.4s ease, color 0.3s ease;
     }
 
-    /* Contenedor Principal de Escena (PC por defecto) */
+    /* Contenedor Principal de Escena */
     #app-stage {
       position: fixed;
       inset: 0;
       width: 100vw;
       height: 100vh;
+      height: 100dvh;
       overflow: hidden;
     }
 
     #canvas-container {
       position: absolute;
       inset: 0;
-      width: 100%;
-      height: 100%;
       z-index: 1;
       cursor: grab;
       touch-action: none;
@@ -115,13 +111,13 @@
       cursor: grabbing;
     }
 
-    /* Barra Superior Flotante con Controles Etiquetados */
+    /* Header Superior */
     .top-bar {
       position: fixed;
       top: 14px;
-      left: 18px;
-      right: 18px;
-      z-index: 25;
+      left: 16px;
+      right: 16px;
+      z-index: 30;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -129,12 +125,11 @@
       pointer-events: none;
     }
 
-    .brand-group,
-    .appearance-bar {
+    .brand-group {
       pointer-events: auto;
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 10px;
       flex-wrap: wrap;
     }
 
@@ -155,14 +150,15 @@
       width: 34px;
       height: 34px;
       border-radius: 10px;
-      background: var(--accent);
-      color: var(--accent-on);
+      background: var(--accent-gradient);
       display: flex;
       align-items: center;
       justify-content: center;
+      color: #ffffff;
       font-weight: 800;
       font-size: 17px;
-      transition: background 0.3s ease, color 0.3s ease;
+      box-shadow: 0 4px 10px var(--accent-glow);
+      flex-shrink: 0;
     }
 
     .brand-title {
@@ -197,7 +193,7 @@
       background: var(--panel-bg);
       backdrop-filter: blur(14px);
       border: 1px solid var(--accent-border);
-      padding: 7px 12px;
+      padding: 8px 13px;
       border-radius: 14px;
       box-shadow: var(--shadow-sm);
       display: flex;
@@ -205,10 +201,11 @@
       gap: 8px;
       text-decoration: none;
       color: var(--text-main);
-      transition: transform 0.2s ease;
+      transition: transform 0.2s ease, border-color 0.2s ease;
     }
 
     .direct-contact-pill:hover {
+      border-color: var(--accent-primary);
       transform: translateY(-1px);
     }
 
@@ -216,12 +213,22 @@
       width: 8px;
       height: 8px;
       border-radius: 50%;
-      background: #22c55e;
-      box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.22);
+      background: #16a34a;
+      box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.22);
+      flex-shrink: 0;
     }
 
-    /* Grupo de Controles Etiquetados: Fondo, Tema, Vista */
-    .control-group-pill {
+    /* Controles Etiquetados de Apariencia y Vista */
+    .studio-controls {
+      pointer-events: auto;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .control-group {
       background: var(--panel-bg);
       backdrop-filter: blur(14px);
       -webkit-backdrop-filter: blur(14px);
@@ -231,29 +238,29 @@
       box-shadow: var(--shadow-sm);
       display: flex;
       align-items: center;
-      gap: 5px;
+      gap: 4px;
     }
 
-    .control-group-label {
-      font-size: 10.5px;
+    .group-label {
+      font-size: 10px;
       font-weight: 800;
       text-transform: uppercase;
-      letter-spacing: 0.04em;
+      letter-spacing: 0.05em;
       color: var(--text-muted);
-      margin-right: 2px;
-      user-select: none;
+      margin-right: 3px;
+      white-space: nowrap;
     }
 
     .seg-btn {
+      border: none;
       background: transparent;
-      border: 1px solid transparent;
       padding: 5px 9px;
-      border-radius: 9px;
+      border-radius: 10px;
       font-size: 11px;
       font-weight: 700;
       color: var(--text-main);
       cursor: pointer;
-      display: inline-flex;
+      display: flex;
       align-items: center;
       gap: 5px;
       transition: all 0.2s ease;
@@ -261,162 +268,164 @@
     }
 
     .seg-btn:hover {
-      background: var(--card-subtle);
+      background: var(--accent-soft);
     }
 
     .seg-btn.active {
-      background: var(--accent);
-      color: var(--accent-on);
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+      background: var(--accent-primary);
+      color: #ffffff;
+      box-shadow: 0 2px 6px var(--accent-glow);
     }
 
-    .swatch-dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      border: 1px solid rgba(128, 128, 128, 0.45);
-      display: inline-block;
-      flex-shrink: 0;
+    body.bg-dark .seg-btn.active {
+      color: #0b140e;
     }
 
-    /* Barra Desplegable "Personalización" (Fondo y Tema) */
-    .personalizacion-dropdown {
+    /* Menú Desplegable Compacto de Personalización */
+    .custom-dropdown {
       position: relative;
     }
 
-    .personalizacion-trigger {
+    .dropdown-trigger {
       background: var(--panel-bg);
       backdrop-filter: blur(14px);
       -webkit-backdrop-filter: blur(14px);
       border: 1px solid var(--panel-border);
-      padding: 6px 12px;
+      padding: 7px 12px;
       border-radius: 14px;
       box-shadow: var(--shadow-sm);
       font-size: 11.5px;
-      font-weight: 800;
+      font-weight: 700;
       color: var(--text-main);
       cursor: pointer;
-      display: inline-flex;
+      display: flex;
       align-items: center;
       gap: 7px;
       transition: all 0.2s ease;
       white-space: nowrap;
     }
 
-    .personalizacion-trigger:hover,
-    .personalizacion-dropdown.open .personalizacion-trigger {
-      border-color: var(--accent);
+    .dropdown-trigger:hover,
+    .dropdown-trigger.open {
+      border-color: var(--accent-primary);
       background: var(--panel-solid);
     }
 
-    .personalizacion-dots {
-      display: inline-flex;
-      align-items: center;
-      gap: 3px;
+    .dropdown-caret {
+      font-size: 9px;
+      opacity: 0.7;
+      transition: transform 0.2s ease;
     }
 
-    .personalizacion-chevron {
-      font-size: 10px;
-      color: var(--text-muted);
-      transition: transform 0.22s ease;
-      display: inline-block;
-    }
-
-    .personalizacion-dropdown.open .personalizacion-chevron {
+    .dropdown-trigger.open .dropdown-caret {
       transform: rotate(180deg);
-      color: var(--accent-dark);
     }
 
-    .personalizacion-menu {
+    .dropdown-menu {
       position: absolute;
       top: calc(100% + 8px);
       right: 0;
-      min-width: 265px;
+      width: 245px;
       background: var(--panel-solid);
       border: 1px solid var(--panel-border);
       border-radius: 16px;
-      padding: 12px;
       box-shadow: var(--shadow-lg);
+      padding: 12px;
       display: none;
       flex-direction: column;
-      gap: 10px;
-      z-index: 40;
-      animation: dropFadeIn 0.18s ease-out;
+      gap: 11px;
+      z-index: 60;
     }
 
-    .personalizacion-dropdown.open .personalizacion-menu {
+    .dropdown-menu.open {
       display: flex;
+      animation: dropFade 0.18s ease-out;
     }
 
-    @keyframes dropFadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(-6px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+    @keyframes dropFade {
+      from { opacity: 0; transform: translateY(-6px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
-    .personalizacion-row {
+    .dropdown-section {
       display: flex;
       flex-direction: column;
-      gap: 5px;
+      gap: 6px;
     }
 
-    .personalizacion-seg-group {
+    .dropdown-section-title {
+      font-size: 10px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--text-muted);
+    }
+
+    .dropdown-options-row {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 5px;
-      background: var(--card-subtle);
-      padding: 4px;
-      border-radius: 11px;
+      gap: 6px;
     }
 
-    .personalizacion-seg-group .seg-btn {
+    .dropdown-options-row .seg-btn {
       justify-content: center;
-      padding: 6px 9px;
+      background: var(--card-bg);
+      border: 1px solid var(--panel-border);
+      padding: 7px 8px;
     }
 
-    /* Panel Izquierdo (PC): Asistente Guiado en 3 Pasos */
+    .dropdown-options-row .seg-btn.active {
+      background: var(--accent-primary);
+      border-color: var(--accent-primary);
+    }
+
+    .swatch-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      border: 1px solid rgba(128, 128, 128, 0.35);
+      display: inline-block;
+      flex-shrink: 0;
+    }
+
+    /* Panel Guiado en 3 Pasos (Asistente Intuitivo) */
     .wizard-panel {
-      position: fixed;
+      position: absolute;
       top: 76px;
-      left: 18px;
-      bottom: 72px;
-      width: 356px;
+      left: 16px;
+      bottom: 16px;
+      width: 375px;
       z-index: 15;
       background: var(--panel-bg);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
       border: 1px solid var(--panel-border);
       border-radius: 22px;
       box-shadow: var(--shadow-lg);
       display: flex;
       flex-direction: column;
       overflow: hidden;
-      transition: background 0.3s ease, border-color 0.3s ease;
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
+    /* Cabecera de Pasos */
     .wizard-header {
       padding: 14px 16px 12px;
       border-bottom: 1px solid var(--panel-border);
       flex-shrink: 0;
     }
 
-    .stepper-tabs {
+    .step-tabs {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 6px;
-      margin-bottom: 9px;
     }
 
     .step-tab {
-      background: var(--card-subtle);
-      border: 1.5px solid transparent;
-      border-radius: 10px;
-      padding: 6px 5px;
+      border: 1px solid var(--panel-border);
+      background: var(--card-bg);
+      border-radius: 11px;
+      padding: 7px 6px;
       cursor: pointer;
       text-align: center;
       transition: all 0.2s ease;
@@ -424,12 +433,14 @@
     }
 
     .step-tab.active {
+      border-color: var(--accent-primary);
       background: var(--accent-soft);
-      border-color: var(--accent);
       color: var(--accent-dark);
+      box-shadow: 0 3px 10px var(--accent-glow);
     }
 
     .step-tab.completed {
+      border-color: var(--accent-border);
       color: var(--text-main);
     }
 
@@ -446,51 +457,61 @@
       font-size: 11px;
       font-weight: 700;
       margin-top: 1px;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
     }
 
-    .wizard-progress-track {
+    .progress-bar-bg {
       height: 4px;
-      background: var(--card-subtle);
+      background: var(--panel-border);
       border-radius: 999px;
+      margin-top: 10px;
       overflow: hidden;
     }
 
-    .wizard-progress-fill {
+    .progress-bar-fill {
       height: 100%;
       width: 33.33%;
-      background: var(--accent);
+      background: var(--accent-primary);
       border-radius: 999px;
-      transition: width 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: width 0.35s ease;
     }
 
+    /* Contenido Scrolleable de cada Paso */
     .wizard-body {
-      padding: 14px 16px;
+      flex: 1 1 auto;
+      min-height: 0;
       overflow-y: auto;
-      flex: 1;
+      padding: 15px 16px 24px;
       display: flex;
       flex-direction: column;
-      gap: 13px;
+      gap: 14px;
+      touch-action: pan-y;
+      overscroll-behavior-y: contain;
+      -webkit-overflow-scrolling: touch;
     }
 
     .wizard-body::-webkit-scrollbar {
       width: 5px;
     }
+
     .wizard-body::-webkit-scrollbar-thumb {
-      background: rgba(128, 128, 128, 0.28);
+      background: rgba(128, 128, 128, 0.25);
       border-radius: 10px;
     }
 
-    .step-pane {
+    .step-view {
       display: none;
       flex-direction: column;
-      gap: 13px;
+      gap: 14px;
+      animation: fadeStep 0.25s ease;
     }
 
-    .step-pane.active {
+    .step-view.active {
       display: flex;
+    }
+
+    @keyframes fadeStep {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     .section-label {
@@ -508,12 +529,11 @@
     .new-badge {
       background: var(--accent-soft);
       color: var(--accent-dark);
-      border: 1px solid var(--accent-border);
       font-size: 9px;
       font-weight: 800;
-      padding: 1.5px 6px;
+      padding: 2px 6px;
       border-radius: 6px;
-      text-transform: uppercase;
+      border: 1px solid var(--accent-border);
     }
 
     .option-grid {
@@ -537,8 +557,9 @@
     }
 
     .option-card.selected {
-      border-color: var(--accent);
+      border-color: var(--accent-primary);
       background: var(--accent-soft);
+      box-shadow: 0 3px 10px var(--accent-glow);
     }
 
     .option-title {
@@ -571,6 +592,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
+      gap: 8px;
       transition: all 0.2s ease;
     }
 
@@ -579,11 +601,11 @@
     }
 
     .option-row.selected {
-      border-color: var(--accent);
+      border-color: var(--accent-primary);
       background: var(--accent-soft);
     }
 
-    /* Switch Botella */
+    /* Switch Bebida */
     .toggle-box {
       background: var(--card-bg);
       border: 1.5px solid var(--panel-border);
@@ -598,7 +620,7 @@
     }
 
     .toggle-box.active {
-      border-color: var(--accent);
+      border-color: var(--accent-primary);
       background: var(--accent-soft);
     }
 
@@ -626,59 +648,19 @@
     }
 
     .toggle-box.active .switch {
-      background: var(--accent);
+      background: var(--accent-primary);
     }
 
     .toggle-box.active .switch::after {
       transform: translateX(18px);
     }
 
-    /* Selector Plan Individual vs Semanal */
-    .plan-switcher {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 7px;
-      background: var(--card-subtle);
-      padding: 5px;
-      border-radius: 13px;
-    }
-
-    .plan-btn {
-      border: 1.5px solid transparent;
-      background: transparent;
-      padding: 8px 8px;
-      border-radius: 10px;
-      cursor: pointer;
-      text-align: center;
-      transition: all 0.2s ease;
-    }
-
-    .plan-btn.active {
-      background: var(--panel-solid);
-      border-color: var(--accent);
-      box-shadow: var(--shadow-sm);
-    }
-
-    .plan-btn strong {
-      display: block;
-      font-size: 11.5px;
-      color: var(--text-main);
-    }
-
-    .plan-btn span {
-      display: block;
-      font-size: 10px;
-      color: var(--accent-dark);
-      font-weight: 800;
-      margin-top: 2px;
-    }
-
-    /* Medidores Nutricionales */
-    .nutri-card-box {
+    /* Paso 2: Nutrición y Recojo */
+    .nutri-card {
       background: var(--card-bg);
       border: 1px solid var(--panel-border);
       border-radius: 14px;
-      padding: 11px 12px;
+      padding: 12px;
       display: flex;
       flex-direction: column;
       gap: 9px;
@@ -695,12 +677,11 @@
       justify-content: space-between;
       font-size: 11px;
       font-weight: 700;
-      color: var(--text-main);
     }
 
     .progress-track {
       height: 6px;
-      background: var(--card-subtle);
+      background: var(--panel-border);
       border-radius: 999px;
       overflow: hidden;
     }
@@ -712,38 +693,33 @@
     }
 
     .synergy-note {
-      background: var(--note-bg);
-      border: 1px solid var(--note-border);
+      background: var(--accent-soft);
+      border: 1px solid var(--accent-border);
       border-radius: 11px;
-      padding: 8px 10px;
+      padding: 9px 11px;
       font-size: 11px;
-      line-height: 1.35;
-      color: var(--note-text);
-    }
-
-    .pickup-box {
-      background: var(--card-bg);
-      border: 1px solid var(--panel-border);
-      border-radius: 13px;
-      padding: 10px 11px;
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
+      line-height: 1.38;
+      color: var(--text-main);
     }
 
     .pickup-select {
       width: 100%;
-      padding: 8px 10px;
-      border-radius: 9px;
-      border: 1px solid var(--panel-border);
-      font-size: 11.5px;
-      font-weight: 600;
+      padding: 9px 10px;
+      border-radius: 10px;
+      border: 1.5px solid var(--panel-border);
+      font-size: 12px;
+      font-weight: 700;
       color: var(--text-main);
       background: var(--panel-solid);
+      outline: none;
     }
 
-    /* Paso 3: Mini-Boleta de Resumen y Doble Pago */
-    .receipt-card {
+    .pickup-select:focus {
+      border-color: var(--accent-primary);
+    }
+
+    /* Paso 3: Mini-boleta y Doble Pago (Yape + WhatsApp) */
+    .receipt-box {
       background: var(--card-bg);
       border: 1.5px dashed var(--accent-border);
       border-radius: 15px;
@@ -753,53 +729,38 @@
       gap: 8px;
     }
 
-    .receipt-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding-bottom: 8px;
-      border-bottom: 1px solid var(--panel-border);
-    }
-
-    .receipt-row {
+    .receipt-line {
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
-      gap: 10px;
+      gap: 8px;
       font-size: 11.5px;
-      line-height: 1.3;
     }
 
-    .receipt-row span:first-child {
+    .receipt-line span:first-child {
       color: var(--text-muted);
       font-weight: 600;
     }
 
-    .receipt-row strong {
-      color: var(--text-main);
+    .receipt-line strong {
       text-align: right;
+      color: var(--text-main);
       font-weight: 700;
     }
 
     .receipt-total {
-      margin-top: 4px;
-      padding-top: 9px;
-      border-top: 1.5px solid var(--panel-border);
+      border-top: 1px solid var(--panel-border);
+      padding-top: 8px;
+      margin-top: 2px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-    }
-
-    .receipt-total-val {
-      font-size: 20px;
-      font-weight: 800;
-      color: var(--accent-dark);
     }
 
     .pay-buttons-stack {
       display: flex;
       flex-direction: column;
-      gap: 8px;
+      gap: 9px;
     }
 
     .btn-yape {
@@ -808,20 +769,20 @@
       border: none;
       border-radius: 13px;
       padding: 12px 14px;
-      font-size: 12.5px;
+      font-size: 13px;
       font-weight: 800;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 8px;
-      box-shadow: 0 8px 20px rgba(116, 34, 132, 0.28);
+      box-shadow: 0 8px 20px rgba(116, 34, 132, 0.3);
       transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
 
     .btn-yape:hover {
-      transform: translateY(-1.5px);
-      box-shadow: 0 12px 24px rgba(116, 34, 132, 0.38);
+      transform: translateY(-1px);
+      box-shadow: 0 11px 24px rgba(116, 34, 132, 0.4);
     }
 
     .cta-wa {
@@ -830,121 +791,21 @@
       border: none;
       border-radius: 13px;
       padding: 12px 14px;
-      font-size: 12.5px;
+      font-size: 13px;
       font-weight: 800;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 8px;
-      box-shadow: 0 8px 20px rgba(37, 211, 102, 0.25);
+      box-shadow: 0 8px 20px rgba(37, 211, 102, 0.28);
       transition: transform 0.2s ease, box-shadow 0.2s ease;
       text-decoration: none;
     }
 
     .cta-wa:hover {
-      transform: translateY(-1.5px);
-      box-shadow: 0 12px 24px rgba(37, 211, 102, 0.35);
-    }
-
-    /* Footer de Navegación del Asistente */
-    .wizard-footer {
-      padding: 11px 16px;
-      border-top: 1px solid var(--panel-border);
-      background: var(--panel-solid);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 8px;
-      flex-shrink: 0;
-    }
-
-    .nav-btn {
-      border-radius: 11px;
-      padding: 9px 14px;
-      font-size: 12px;
-      font-weight: 800;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      border: 1px solid var(--panel-border);
-    }
-
-    .nav-btn-back {
-      background: var(--card-subtle);
-      color: var(--text-main);
-    }
-
-    .nav-btn-back:hover {
-      border-color: var(--accent-border);
-    }
-
-    .nav-btn-next {
-      background: var(--accent);
-      color: var(--accent-on);
-      border-color: var(--accent);
-      flex: 1;
-      text-align: center;
-    }
-
-    .nav-btn-next:hover {
-      filter: brightness(1.06);
-    }
-
-    /* Tarjeta Compacta Derecha (Solo PC): Resumen en Vivo */
-    .live-summary-card {
-      position: fixed;
-      top: 76px;
-      right: 18px;
-      width: 286px;
-      z-index: 15;
-      background: var(--panel-bg);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border: 1px solid var(--panel-border);
-      border-radius: 22px;
-      box-shadow: var(--shadow-lg);
-      padding: 16px;
-      display: flex;
-      flex-direction: column;
-      gap: 11px;
-      transition: background 0.3s ease;
-    }
-
-    .price-pill-box {
-      background: var(--accent-soft);
-      border: 1px solid var(--accent-border);
-      color: var(--accent-dark);
-      padding: 6px 10px;
-      border-radius: 11px;
-      text-align: right;
-      flex-shrink: 0;
-    }
-
-    .price-pill-box strong {
-      display: block;
-      font-size: 16px;
-      font-weight: 800;
-      line-height: 1.1;
-    }
-
-    .price-pill-box span {
-      font-size: 9.5px;
-      font-weight: 700;
-    }
-
-    .formula-badges {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 5px;
-    }
-
-    .f-badge {
-      font-size: 10px;
-      font-weight: 700;
-      padding: 3px 8px;
-      border-radius: 7px;
-      background: var(--card-subtle);
-      color: var(--text-main);
+      transform: translateY(-1px);
+      box-shadow: 0 11px 24px rgba(37, 211, 102, 0.38);
     }
 
     .info-link-btn {
@@ -952,24 +813,86 @@
       border: 1px dashed var(--accent-border);
       color: var(--accent-dark);
       border-radius: 10px;
-      padding: 7px 10px;
+      padding: 8px 10px;
       font-size: 11px;
       font-weight: 700;
       cursor: pointer;
       text-align: center;
       transition: background 0.2s ease;
-      width: 100%;
     }
 
     .info-link-btn:hover {
       background: var(--accent-soft);
     }
 
-    /* Barra Discreta Inferior de Vistas Libres 3D */
+    /* Footer Fijo del Asistente */
+    .wizard-footer {
+      padding: 11px 16px;
+      border-top: 1px solid var(--panel-border);
+      background: var(--panel-solid);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      flex-shrink: 0;
+    }
+
+    .footer-price-box {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .footer-price-val {
+      font-size: 17px;
+      font-weight: 800;
+      color: var(--accent-dark);
+      line-height: 1.1;
+    }
+
+    .footer-price-sub {
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+
+    .footer-nav-btns {
+      display: flex;
+      gap: 7px;
+    }
+
+    .nav-btn {
+      border: 1px solid var(--panel-border);
+      background: var(--card-bg);
+      color: var(--text-main);
+      padding: 9px 13px;
+      border-radius: 11px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .nav-btn.primary {
+      background: var(--accent-primary);
+      border-color: var(--accent-primary);
+      color: #ffffff;
+      box-shadow: 0 4px 12px var(--accent-glow);
+    }
+
+    body.bg-dark .nav-btn.primary {
+      color: #0b140e;
+    }
+
+    .nav-btn:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+
+    /* Barra Discreta de Vistas 3D */
     .camera-dock {
-      position: fixed;
-      bottom: 14px;
-      left: 50%;
+      position: absolute;
+      bottom: 16px;
+      left: calc(50% + 185px);
       transform: translateX(-50%);
       z-index: 15;
       background: var(--panel-bg);
@@ -981,14 +904,18 @@
       box-shadow: var(--shadow-lg);
       display: flex;
       gap: 4px;
-      max-width: 96vw;
+      max-width: calc(100vw - 415px);
       overflow-x: auto;
+    }
+
+    .camera-dock::-webkit-scrollbar {
+      display: none;
     }
 
     .cam-btn {
       background: transparent;
       border: none;
-      padding: 6px 10px;
+      padding: 6px 11px;
       border-radius: 10px;
       font-size: 11px;
       font-weight: 700;
@@ -1000,36 +927,29 @@
 
     .cam-btn:hover {
       color: var(--text-main);
-      background: var(--card-subtle);
+      background: var(--accent-soft);
     }
 
     .cam-btn.active {
-      background: var(--accent);
-      color: var(--accent-on);
+      background: var(--accent-primary);
+      color: #ffffff;
     }
 
-    /* ==========================================================================
-       MODO MÓVIL SPLIT-SCREEN (44vh Visor 3D Superior + 56vh Asistente Inferior)
-       Se activa en pantallas < 860px O al pulsar "Vista: Móvil" en PC
-       ========================================================================== */
-    body.mobile-mode .live-summary-card,
+    body.bg-dark .cam-btn.active {
+      color: #0b140e;
+    }
+
+    /* ===================================================================== */
+    /* MODO MÓVIL (Split-Screen: Visor 3D fijo arriba + Pasos abajo)        */
+    /* ===================================================================== */
+    body.mobile-mode #app-stage {
+      top: 56px;
+      height: calc(var(--vh-full, 100dvh) - 56px);
+    }
+
+    body.mobile-mode .brand-sub,
     body.mobile-mode .direct-contact-pill {
-      display: none !important;
-    }
-
-    /* Simulación centrada tipo smartphone cuando se activa "Vista: Móvil" desde PC */
-    body.mobile-mode.desktop-sim #app-stage {
-      top: 68px;
-      bottom: 14px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 430px;
-      max-width: 96vw;
-      height: calc(100vh - 82px);
-      border-radius: 28px;
-      border: 2px solid var(--panel-border);
-      box-shadow: var(--shadow-lg);
-      background: var(--bg-studio);
+      display: none;
     }
 
     body.mobile-mode #canvas-container {
@@ -1038,13 +958,14 @@
       left: 0;
       right: 0;
       bottom: auto;
-      height: 44%;
+      height: 34%;
       width: 100%;
+      touch-action: none;
     }
 
     body.mobile-mode .camera-dock {
       position: absolute;
-      top: calc(44% - 42px);
+      top: calc(34% - 38px);
       bottom: auto;
       left: 50%;
       transform: translateX(-50%);
@@ -1060,15 +981,38 @@
 
     body.mobile-mode .wizard-panel {
       position: absolute;
-      top: 44%;
+      top: 34%;
       left: 0;
       right: 0;
       bottom: 0;
       width: 100%;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
       border-radius: 22px 22px 0 0;
       border-left: none;
       border-right: none;
       border-bottom: none;
+    }
+
+    body.mobile-mode .wizard-body {
+      flex: 1 1 auto;
+      min-height: 0;
+      overflow-y: auto;
+      padding-bottom: 20px;
+      touch-action: pan-y;
+      overscroll-behavior-y: contain;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    body.mobile-mode .wizard-footer {
+      display: flex;
+      padding: 11px 14px;
+      border: 1px solid var(--panel-border);
+      border-radius: 15px;
+      background: var(--panel-solid);
+      box-shadow: var(--shadow-sm);
+      margin-top: 2px;
     }
 
     body.mobile-mode .option-card,
@@ -1079,21 +1023,41 @@
       min-height: 42px;
     }
 
-    @media (max-width: 1180px) {
+    /* Simulación visual en laptop cuando el usuario activa Vista Móvil */
+    body.mobile-mode.desktop-sim {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    body.mobile-mode.desktop-sim #app-stage {
+      position: relative;
+      top: 26px;
+      width: 412px;
+      height: min(780px, calc(100vh - 90px));
+      border-radius: 36px;
+      border: 8px solid #1e293b;
+      box-shadow: 0 30px 70px rgba(0, 0, 0, 0.35);
+    }
+
+    @media (max-width: 1080px) {
       .direct-contact-pill {
         display: none;
       }
-      .brand-sub {
-        display: none;
+      .wizard-panel {
+        width: 340px;
+      }
+      .camera-dock {
+        left: calc(50% + 170px);
+        max-width: calc(100vw - 380px);
       }
     }
 
-    @media (max-width: 860px) {
+    @media (max-width: 820px) {
       .top-bar {
         top: 8px;
         left: 10px;
         right: 10px;
-        gap: 6px;
       }
       .brand-badge {
         padding: 6px 10px;
@@ -1109,34 +1073,28 @@
       .mvp-tag {
         display: none;
       }
-      .control-group-pill {
-        padding: 3px 5px 3px 8px;
-      }
-      .control-group-label {
-        font-size: 9.5px;
-      }
-      .seg-btn {
-        padding: 4px 7px;
-        font-size: 10px;
-      }
-      .personalizacion-trigger {
-        padding: 5px 10px;
-        font-size: 11px;
-      }
-      .personalizacion-menu {
-        min-width: 245px;
-        max-width: calc(100vw - 20px);
-      }
-      .personalizacion-seg-group .seg-btn {
-        padding: 6px 8px;
-        font-size: 11px;
-      }
       #vista-control-group {
         display: none;
       }
       #app-stage {
-        top: 54px;
-        height: calc(100vh - 54px);
+        top: 52px;
+        height: calc(var(--vh-full, 100dvh) - 52px);
+      }
+      /* Espacio inferior calibrado en móvil real para librar la barra de Safari sin exceso de blanco */
+      body.mobile-mode .wizard-body {
+        padding-bottom: calc(68px + env(safe-area-inset-bottom, 12px));
+      }
+      body.mobile-mode .wizard-footer {
+        padding: 11px 14px;
+      }
+      .modal-backdrop {
+        align-items: flex-start;
+        overflow-y: auto;
+        padding-bottom: calc(92px + env(safe-area-inset-bottom, 16px));
+      }
+      .modal-card {
+        margin: auto 0;
+        max-height: none;
       }
     }
 
@@ -1144,7 +1102,7 @@
     .modal-backdrop {
       position: fixed;
       inset: 0;
-      background: rgba(10, 15, 12, 0.58);
+      background: rgba(10, 15, 12, 0.55);
       backdrop-filter: blur(6px);
       z-index: 60;
       display: none;
@@ -1165,51 +1123,33 @@
       max-width: 460px;
       width: 100%;
       padding: 22px;
-      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.35);
+      box-shadow: 0 25px 55px -12px rgba(0, 0, 0, 0.4);
       display: flex;
       flex-direction: column;
       gap: 14px;
-    }
-
-    .modal-close-btn {
-      border: 1px solid var(--panel-border);
-      background: var(--card-subtle);
-      color: var(--text-main);
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      font-weight: 800;
-      cursor: pointer;
-    }
-
-    /* Estilos específicos Modal Yape */
-    .yape-hero-box {
-      background: linear-gradient(135deg, #6b1d7a, #8b269e);
-      color: #ffffff;
-      border-radius: 18px;
-      padding: 16px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 10px;
-      text-align: center;
+      max-height: 92vh;
+      overflow-y: auto;
     }
 
     .yape-qr-frame {
       background: #ffffff;
-      padding: 10px;
-      border-radius: 16px;
-      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.22);
-      display: inline-flex;
+      border: 3px solid #742284;
+      border-radius: 18px;
+      padding: 14px;
+      width: 190px;
+      height: 190px;
+      margin: 0 auto;
+      display: flex;
       align-items: center;
       justify-content: center;
+      box-shadow: 0 10px 25px rgba(116, 34, 132, 0.16);
     }
 
     .yape-number-bar {
-      background: var(--card-subtle);
+      background: var(--card-bg);
       border: 1.5px solid var(--panel-border);
       border-radius: 14px;
-      padding: 10px 12px;
+      padding: 10px 14px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -1221,11 +1161,11 @@
       color: #ffffff;
       border: none;
       border-radius: 10px;
-      padding: 8px 12px;
+      padding: 7px 11px;
       font-size: 11.5px;
       font-weight: 800;
       cursor: pointer;
-      transition: all 0.2s ease;
+      transition: background 0.2s ease;
       white-space: nowrap;
     }
 
@@ -1236,33 +1176,33 @@
     .modal-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 10px;
+      gap: 9px;
     }
 
     .modal-item {
-      background: var(--card-subtle);
+      background: var(--card-bg);
       border: 1px solid var(--panel-border);
       border-radius: 12px;
-      padding: 11px;
+      padding: 10px;
     }
 
     .modal-item h4 {
-      font-size: 12px;
+      font-size: 11.5px;
       color: var(--accent-dark);
       margin-bottom: 4px;
     }
 
     .modal-item p {
-      font-size: 11px;
+      font-size: 10.5px;
       color: var(--text-muted);
       line-height: 1.35;
     }
 
-    /* Loading Overlay */
+    /* Pantalla de Carga */
     #loader {
       position: fixed;
       inset: 0;
-      background: #f7f8fa;
+      background: var(--bg-studio);
       z-index: 100;
       display: flex;
       flex-direction: column;
@@ -1275,8 +1215,8 @@
     .spinner {
       width: 38px;
       height: 38px;
-      border: 3.5px solid #e2e8f0;
-      border-top-color: #2e7d32;
+      border: 3.5px solid rgba(128, 128, 128, 0.2);
+      border-top-color: var(--accent-primary);
       border-radius: 50%;
       animation: spin 0.8s linear infinite;
     }
@@ -1295,14 +1235,14 @@
     }
   </script>
 </head>
-<body data-bg="light" data-theme="green">
+<body class="theme-leaf">
 
   <div id="loader">
     <div class="spinner"></div>
-    <div style="font-weight:700; font-size:14px; color:#1b5e20;">Cargando PMV Final de NUTIVA 3D...</div>
+    <div style="font-weight:700; font-size:14px; color:var(--accent-dark);">Cargando PMV Final de NUTIVA 3D...</div>
   </div>
 
-  <!-- Barra Superior con Controles Etiquetados: Fondo, Tema y Vista -->
+  <!-- Barra Superior con Controles Etiquetados -->
   <header class="top-bar">
     <div class="brand-group">
       <div class="brand-badge">
@@ -1316,55 +1256,47 @@
         </div>
       </div>
 
-      <a href="https://wa.me/51994013003?text=Hola%20NUTIVA,%20quisiera%20hacer%20un%20pedido%20express%20en%20campus" target="_blank" class="direct-contact-pill" title="Contacto directo y recojo inmediato en campus">
+      <a href="https://wa.me/51902182049?text=Hola%20NUTIVA,%20quisiera%20hacer%20un%20pedido%20express%20en%20campus" target="_blank" rel="noopener noreferrer" class="direct-contact-pill" title="Contacto directo y recojo inmediato en campus">
         <span class="pulse-dot"></span>
         <div>
-          <div style="font-size:11.5px; font-weight:800;">📞 +51 994 013 003</div>
+          <div style="font-size:11.5px; font-weight:800;">📞 +51 902 182 049</div>
           <div style="font-size:10px; font-weight:700; color:var(--accent-dark);">Recojo Express Campus (10-15 min)</div>
         </div>
       </a>
     </div>
 
-    <div class="appearance-bar">
-      <!-- Barra Desplegable Compacta: Personalización (Fondo y Tema) -->
-      <div class="personalizacion-dropdown" id="personalizacion-dropdown">
-        <button
-          type="button"
-          class="personalizacion-trigger"
-          id="btn-toggle-personalizacion"
-          aria-expanded="false"
-          aria-controls="personalizacion-menu"
-        >
+    <div class="studio-controls">
+      <!-- Barra Desplegable Compacta: Personalización -->
+      <div class="custom-dropdown" id="personalizacion-dropdown">
+        <button type="button" class="dropdown-trigger" id="btn-personalizacion" aria-expanded="false" aria-haspopup="true">
           <span>🎨 Personalización</span>
-          <span class="personalizacion-dots" aria-hidden="true">
-            <span class="swatch-dot" id="indicator-bg-dot" style="background:#f7f8fa;"></span>
-            <span class="swatch-dot" id="indicator-theme-dot" style="background:#2e7d32;"></span>
-          </span>
-          <span class="personalizacion-chevron">▼</span>
+          <span class="swatch-dot" id="swatch-bg" style="background:#f7f8fa;" title="Fondo actual"></span>
+          <span class="swatch-dot" id="swatch-theme" style="background:#2e7d32;" title="Tema actual"></span>
+          <span class="dropdown-caret">▼</span>
         </button>
 
-        <div class="personalizacion-menu" id="personalizacion-menu" role="region" aria-label="Opciones de Personalización">
-          <!-- Control 1: Fondo (Blanco / Oscuro) -->
-          <div class="personalizacion-row" role="group" aria-label="Selector de Fondo">
-            <span class="control-group-label">Fondo:</span>
-            <div class="personalizacion-seg-group">
-              <button type="button" class="seg-btn active" data-bg-val="light">
+        <div class="dropdown-menu" id="personalizacion-menu">
+          <!-- Control de Fondo -->
+          <div class="dropdown-section">
+            <span class="dropdown-section-title">Fondo</span>
+            <div class="dropdown-options-row" id="bg-controls">
+              <button type="button" class="seg-btn active" data-bg="white">
                 <span class="swatch-dot" style="background:#f7f8fa;"></span> Blanco
               </button>
-              <button type="button" class="seg-btn" data-bg-val="dark">
-                <span class="swatch-dot" style="background:#121513;"></span> Oscuro
+              <button type="button" class="seg-btn" data-bg="dark">
+                <span class="swatch-dot" style="background:#181e1b;"></span> Oscuro
               </button>
             </div>
           </div>
 
-          <!-- Control 2: Tema (Verde Hoja / Otoño Cálido) -->
-          <div class="personalizacion-row" role="group" aria-label="Selector de Tema">
-            <span class="control-group-label">Tema:</span>
-            <div class="personalizacion-seg-group">
-              <button type="button" class="seg-btn active" data-theme-val="green">
+          <!-- Control de Tema / Fuentes -->
+          <div class="dropdown-section">
+            <span class="dropdown-section-title">Tema</span>
+            <div class="dropdown-options-row" id="theme-controls">
+              <button type="button" class="seg-btn active" data-theme="leaf">
                 <span class="swatch-dot" style="background:#2e7d32;"></span> Verde Hoja
               </button>
-              <button type="button" class="seg-btn" data-theme-val="autumn">
+              <button type="button" class="seg-btn" data-theme="autumn">
                 <span class="swatch-dot" style="background:#c2410c;"></span> Otoño Cálido
               </button>
             </div>
@@ -1372,58 +1304,58 @@
         </div>
       </div>
 
-      <!-- Control 3: Vista (PC / Móvil) -->
-      <div class="control-group-pill" id="vista-control-group" role="group" aria-label="Selector de Vista">
-        <span class="control-group-label">Vista:</span>
-        <button class="seg-btn active" data-view-mode="pc">💻 PC</button>
-        <button class="seg-btn" data-view-mode="mobile">📱 Móvil</button>
+      <!-- Control Etiquetado: Vista PC / Móvil -->
+      <div class="control-group" id="vista-control-group">
+        <span class="group-label">Vista:</span>
+        <button type="button" class="seg-btn active" data-mode="desktop">🖥️ PC</button>
+        <button type="button" class="seg-btn" data-mode="mobile">📱 Móvil</button>
       </div>
     </div>
   </header>
 
-  <!-- Escenario Principal (Adapta PC Full-Screen o Split-Screen Móvil) -->
+  <!-- Escenario Principal (Adaptable PC / Celular) -->
   <main id="app-stage">
     <div id="canvas-container"></div>
 
-    <!-- Barra Discreta de Vistas Libres 3D -->
-    <nav class="camera-dock" aria-label="Vistas 3D">
-      <button class="cam-btn active" data-view="hero">General</button>
-      <button class="cam-btn" data-view="logo">Logo Exterior</button>
-      <button class="cam-btn" data-view="cookies">Galletas</button>
-      <button class="cam-btn" data-view="fruits">Frutas</button>
-      <button class="cam-btn" id="btn-lid">📦 Cerrar Caja</button>
-      <button class="cam-btn" id="btn-autorotate">🔄 Auto-Giro</button>
+    <!-- Barra Discreta de Ángulos 3D -->
+    <nav class="camera-dock">
+      <button type="button" class="cam-btn active" data-view="hero">General</button>
+      <button type="button" class="cam-btn" data-view="logo">Logo Exterior</button>
+      <button type="button" class="cam-btn" data-view="cookies">Galletas</button>
+      <button type="button" class="cam-btn" data-view="fruits">Frutas</button>
+      <button type="button" class="cam-btn" id="btn-lid">📦 Cerrar Caja</button>
+      <button type="button" class="cam-btn" id="btn-autorotate" title="Activar o pausar giro automático">🔄</button>
     </nav>
 
-    <!-- Asistente Guiado en 3 Pasos ("Cero confusión") -->
+    <!-- Panel Asistente Intuitivo de 3 Pasos -->
     <aside class="wizard-panel" id="wizard-panel">
       <div class="wizard-header">
-        <div class="stepper-tabs">
-          <button class="step-tab active" data-step="1">
+        <div class="step-tabs" id="step-tabs">
+          <button type="button" class="step-tab active" data-step="1">
             <span class="step-num">Paso 1</span>
             <span class="step-name">Arma tu Pack</span>
           </button>
-          <button class="step-tab" data-step="2">
+          <button type="button" class="step-tab" data-step="2">
             <span class="step-num">Paso 2</span>
             <span class="step-name">Plan y Recojo</span>
           </button>
-          <button class="step-tab" data-step="3">
+          <button type="button" class="step-tab" data-step="3">
             <span class="step-num">Paso 3</span>
             <span class="step-name">Resumen y Pago</span>
           </button>
         </div>
-        <div class="wizard-progress-track">
-          <div class="wizard-progress-fill" id="wizard-progress-fill"></div>
+        <div class="progress-bar-bg">
+          <div class="progress-bar-fill" id="wizard-progress-fill"></div>
         </div>
       </div>
 
-      <div class="wizard-body">
+      <div class="wizard-body" id="wizard-body">
         <!-- PASO 1: ARMA TU PACK -->
-        <section class="step-pane active" id="step-pane-1">
+        <div class="step-view active" id="step-1">
           <div>
             <div class="section-label">
               <span>1. Forma de Galletas (Izquierda)</span>
-              <span class="new-badge">Zoom Auto</span>
+              <span class="new-badge">PMV Final</span>
             </div>
             <div class="option-grid" id="shape-options">
               <div class="option-card selected" data-shape="heart">
@@ -1440,7 +1372,7 @@
           <div>
             <div class="section-label">
               <span>2. Frutas Deshidratadas (Derecha)</span>
-              <span class="new-badge">Catálogo</span>
+              <span class="new-badge">Catálogo Ampliado</span>
             </div>
             <div class="option-grid" id="fruit-options">
               <div class="option-card selected" data-mix="fresa_papaya">
@@ -1453,7 +1385,7 @@
               </div>
               <div class="option-card" data-mix="energia">
                 <span class="option-title">Mix Energía</span>
-                <span class="option-desc">Plátano, mango, aguaymanto</span>
+                <span class="option-desc">Plátano, mango y aguaymanto</span>
               </div>
               <div class="option-card" data-mix="hierro">
                 <span class="option-title">Hierro Plus</span>
@@ -1464,7 +1396,7 @@
 
           <div>
             <div class="section-label">
-              <span>3. Topping Galletas de Sangrecita</span>
+              <span>3. Topping Galletas Sangrecita</span>
             </div>
             <div class="option-list" id="topping-options">
               <div class="option-row selected" data-topping="avena">
@@ -1472,28 +1404,28 @@
                   <span class="option-title">Avena Suave Reformulada</span>
                   <span class="option-desc">Textura tierna • Dulzor bajo validado</span>
                 </div>
-                <span>🌾</span>
+                <span style="font-size:18px;">🌾</span>
               </div>
               <div class="option-row" data-topping="cacao">
                 <div>
                   <span class="option-title">Chispas de Cacao 70%</span>
-                  <span class="option-desc">Cacao puro de Satipo (+S/ 0.50)</span>
+                  <span class="option-desc">Cacao puro de Satipo antioxidante</span>
                 </div>
-                <span>🍫</span>
+                <span style="font-size:18px;">🍫</span>
               </div>
               <div class="option-row" data-topping="semillas">
                 <div>
                   <span class="option-title">Semillas Andinas</span>
                   <span class="option-desc">Ajonjolí tostado y chía orgánica</span>
                 </div>
-                <span>✨</span>
+                <span style="font-size:18px;">✨</span>
               </div>
             </div>
           </div>
 
           <div>
             <div class="section-label">
-              <span>4. Bebida Complementaria</span>
+              <span>4. Bebida Natural Complementaria</span>
             </div>
             <div class="toggle-box" id="drink-toggle">
               <div>
@@ -1503,64 +1435,64 @@
               <div class="switch"></div>
             </div>
           </div>
-        </section>
+        </div>
 
-        <!-- PASO 2: PLAN Y RECOJO -->
-        <section class="step-pane" id="step-pane-2">
+        <!-- PASO 2: PLAN, NUTRICIÓN Y RECOJO -->
+        <div class="step-view" id="step-2">
           <div>
             <div class="section-label">
-              <span>1. Elige tu Modalidad</span>
-              <span class="new-badge">Ahorro</span>
+              <span>1. Modalidad de Compra</span>
             </div>
-            <div class="plan-switcher" id="plan-switcher">
-              <button class="plan-btn active" data-plan="individual">
-                <strong>Pack Diario</strong>
-                <span id="plan-daily-hint">S/ 5.00 • Hoy</span>
-              </button>
-              <button class="plan-btn" data-plan="semanal">
-                <strong>Plan Semanal (5d)</strong>
-                <span id="plan-weekly-hint">S/ 24.00 • Lun-Vie</span>
-              </button>
+            <div class="option-grid" id="plan-options">
+              <div class="option-card selected" data-plan="individual">
+                <span class="option-title">Pack Diario</span>
+                <span class="option-desc" id="plan-unit-desc">S/ 5.00 • Compra por hoy</span>
+              </div>
+              <div class="option-card" data-plan="semanal">
+                <span class="option-title">Plan Semanal (5d)</span>
+                <span class="option-desc" id="plan-week-desc">S/ 24.00 • Lun a Vie (-S/ 1)</span>
+              </div>
             </div>
           </div>
 
           <div>
             <div class="section-label">
-              <span>2. Aporte Nutricional Validado</span>
+              <span>2. Aporte Nutricional en Vivo</span>
+              <span class="new-badge">Bajo en Azúcar</span>
             </div>
-            <div class="nutri-card-box">
+            <div class="nutri-card">
               <div class="stat-row">
                 <div class="stat-top">
                   <span>Hierro Hemínico (Anti-anemia)</span>
-                  <span class="iron-val-text" style="color:#dc2626; font-weight:800;">48% VDR</span>
+                  <span id="iron-val" style="color:#dc2626;">48% VDR</span>
                 </div>
                 <div class="progress-track">
-                  <div class="progress-fill iron-bar-fill" style="width: 48%; background: #dc2626;"></div>
+                  <div class="progress-fill" id="iron-bar" style="width:48%; background:#dc2626;"></div>
                 </div>
               </div>
 
               <div class="stat-row">
                 <div class="stat-top">
                   <span>Vitamina C (Fijador de Hierro)</span>
-                  <span class="vitc-val-text" style="color:#d97706; font-weight:800;">78% VDR</span>
+                  <span id="vitc-val" style="color:#d97706;">78% VDR</span>
                 </div>
                 <div class="progress-track">
-                  <div class="progress-fill vitc-bar-fill" style="width: 78%; background: #f59e0b;"></div>
+                  <div class="progress-fill" id="vitc-bar" style="width:78%; background:#f59e0b;"></div>
                 </div>
               </div>
 
               <div class="stat-row">
                 <div class="stat-top">
                   <span>Energía Académica Sostenida</span>
-                  <span class="energy-val-text" style="color:var(--accent-dark); font-weight:800;">315 kcal (3h)</span>
+                  <span id="energy-val" style="color:var(--accent-primary);">315 kcal (3h)</span>
                 </div>
                 <div class="progress-track">
-                  <div class="progress-fill energy-bar-fill" style="width: 74%; background: var(--accent);"></div>
+                  <div class="progress-fill" id="energy-bar" style="width:74%; background:var(--accent-primary);"></div>
                 </div>
               </div>
 
-              <div class="synergy-note synergy-note-text">
-                💡 <strong>Mejora PMV:</strong> Galletas suaves en forma de corazón con fresa y papaya deshidratada artesanalmente en Huancayo.
+              <div class="synergy-note" id="synergy-text">
+                💡 <strong>Mejora PMV:</strong> Galletas suaves en forma de corazón con fresa y papaya deshidratada artesanalmente.
               </div>
             </div>
           </div>
@@ -1569,13 +1501,13 @@
             <div class="section-label">
               <span>3. Punto de Recojo Express en Campus</span>
             </div>
-            <div class="pickup-box">
-              <div style="font-size:11px; font-weight:800; display:flex; justify-content:space-between;">
+            <div class="nutri-card" style="gap:8px;">
+              <div style="display:flex; justify-content:space-between; font-size:11px; font-weight:800;">
                 <span>⚡ Entrega sin filas UC Huancayo</span>
-                <span style="color:var(--accent-dark);">10 - 15 min</span>
+                <span style="color:var(--accent-primary);">10 - 15 min</span>
               </div>
               <select class="pickup-select" id="pickup-point">
-                <option value="Puerta Principal - Universidad Continental">📍 Puerta Principal - Univ. Continental</option>
+                <option value="Puerta Principal - Univ. Continental">📍 Puerta Principal - Univ. Continental</option>
                 <option value="Cafetería Central / Patio Campus">📍 Cafetería Central / Patio Campus</option>
                 <option value="Pabellón de Ingeniería (Receso)">📍 Pabellón de Ingeniería (Receso)</option>
               </select>
@@ -1597,203 +1529,152 @@
               </div>
             </div>
           </div>
-        </section>
-
-        <!-- PASO 3: RESUMEN Y PAGO (YAPE + WHATSAPP) -->
-        <section class="step-pane" id="step-pane-3">
-          <div class="receipt-card">
-            <div class="receipt-header">
-              <div>
-                <div style="font-size:10px; font-weight:800; text-transform:uppercase; color:var(--accent-dark);">Mini-Boleta de Pedido</div>
-                <div style="font-size:13.5px; font-weight:800;">NUTIVA • NutriPack Express</div>
-              </div>
-              <span class="mvp-tag">10 - 15 min</span>
-            </div>
-
-            <div class="receipt-row">
-              <span>Modalidad:</span>
-              <strong id="rec-plan">Pack Diario (1 día)</strong>
-            </div>
-            <div class="receipt-row">
-              <span>Galletas Sangrecita:</span>
-              <strong id="rec-cookies">Corazón • Avena Suave</strong>
-            </div>
-            <div class="receipt-row">
-              <span>Frutas Deshidratadas:</span>
-              <strong id="rec-fruits">Fresa & Papaya</strong>
-            </div>
-            <div class="receipt-row">
-              <span>Bebida Natural:</span>
-              <strong id="rec-drink">Sin bebida adicional</strong>
-            </div>
-            <div class="receipt-row">
-              <span>Punto de Recojo:</span>
-              <strong id="rec-pickup">Puerta Principal - Univ. Continental</strong>
-            </div>
-
-            <div class="receipt-total">
-              <div>
-                <div style="font-size:11px; font-weight:800;">Total a Pagar</div>
-                <div style="font-size:10px; color:var(--text-muted);" id="rec-sub">Pago seguro contraentrega o Yape</div>
-              </div>
-              <div class="receipt-total-val" id="rec-total">S/ 5.00</div>
-            </div>
-          </div>
-
-          <div class="pay-buttons-stack">
-            <button type="button" class="btn-yape" id="btn-open-yape">
-              <span>💜 Pagar con Yape (994 013 003)</span>
-            </button>
-
-            <a href="#" target="_blank" class="cta-wa" id="wa-order-btn">
-              <span>📲 Pedir por WhatsApp Express</span>
-            </a>
-          </div>
 
           <button type="button" class="info-link-btn" id="btn-open-traceability">
-            🔍 Ver Origen de Insumos y Ficha por Paquete
+            🔍 Ver Origen de Insumos y Trazabilidad
           </button>
-        </section>
+        </div>
+
+        <!-- PASO 3: RESUMEN Y PAGO (YAPE + WHATSAPP) -->
+        <div class="step-view" id="step-3">
+          <div>
+            <div class="section-label">
+              <span>Resumen de tu NutriPack Express</span>
+              <span class="new-badge">Listo para pedir</span>
+            </div>
+
+            <div class="receipt-box">
+              <div class="receipt-line">
+                <span>Modalidad:</span>
+                <strong id="rec-plan">Pack Diario (1 día)</strong>
+              </div>
+              <div class="receipt-line">
+                <span>Galletas Sangrecita:</span>
+                <strong id="rec-cookies">❤️ Corazón • Avena Suave</strong>
+              </div>
+              <div class="receipt-line">
+                <span>Frutas Deshidratadas:</span>
+                <strong id="rec-fruits">Fresa & Papaya</strong>
+              </div>
+              <div class="receipt-line">
+                <span>Bebida Natural:</span>
+                <strong id="rec-drink">No incluida</strong>
+              </div>
+              <div class="receipt-line">
+                <span>Recojo (10-15 min):</span>
+                <strong id="rec-pickup">Puerta Principal - Univ. Continental</strong>
+              </div>
+              <div class="receipt-total">
+                <span style="font-size:12.5px; font-weight:800;">Total a Pagar</span>
+                <span style="font-size:19px; font-weight:800; color:var(--accent-dark);" id="rec-total">S/ 5.00</span>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div class="section-label">
+              <span>Elige tu Método de Pago</span>
+            </div>
+            <div class="pay-buttons-stack">
+              <button type="button" class="btn-yape" id="btn-open-yape">
+                <span>💜 Pagar con Yape (+51 902 182 049)</span>
+              </button>
+
+              <a href="#" target="_blank" rel="noopener noreferrer" class="cta-wa" id="wa-order-btn">
+                <span>📲 Pedir por WhatsApp Express</span>
+              </a>
+            </div>
+          </div>
+
+          <div class="synergy-note" style="font-size:10.5px;">
+            ✅ <strong>Sin filas:</strong> Si pagas con Yape, envía tu captura con un clic y empezamos a preparar tu caja para entrega inmediata en campus.
+          </div>
+        </div>
       </div>
 
-      <!-- Footer de Navegación Paso a Paso -->
+      <!-- Barra de Navegación Inferior (Fija en PC / Al final del scroll en Móvil) -->
       <div class="wizard-footer" id="wizard-footer">
-        <button type="button" class="nav-btn nav-btn-back" id="btn-prev-step" style="display:none;">← Atrás</button>
-        <div id="footer-price-badge" style="font-size:12px; font-weight:800; color:var(--accent-dark);">Total: S/ 5.00</div>
-        <button type="button" class="nav-btn nav-btn-next" id="btn-next-step">Siguiente: Plan y Recojo →</button>
-      </div>
-    </aside>
-
-    <!-- Tarjeta Compacta Derecha (Solo en PC): Resumen en Vivo -->
-    <aside class="live-summary-card" aria-label="Resumen nutricional en vivo">
-      <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:8px;">
-        <div>
-          <div style="font-size:10px; font-weight:800; color:var(--accent-dark); text-transform:uppercase;">Tu Pack Actual</div>
-          <div style="font-size:14px; font-weight:800; line-height:1.2; margin-top:2px;" id="pc-summary-title">Fresa & Papaya + Avena</div>
+        <div class="footer-price-box">
+          <span class="footer-price-val" id="footer-price">S/ 5.00</span>
+          <span class="footer-price-sub" id="footer-plan-label">Pack Diario (1 día)</span>
         </div>
-        <div class="price-pill-box">
-          <strong id="pc-price-display">S/ 5.00</strong>
-          <span id="pc-price-sub">Pack Diario</span>
+        <div class="footer-nav-btns">
+          <button type="button" class="nav-btn" id="btn-prev-step" disabled>← Atrás</button>
+          <button type="button" class="nav-btn primary" id="btn-next-step">Plan y Recojo →</button>
         </div>
       </div>
-
-      <div class="formula-badges">
-        <span class="f-badge">✓ Masa suave</span>
-        <span class="f-badge">✓ Bajo azúcar</span>
-        <span class="f-badge">✓ Biodegradable</span>
-      </div>
-
-      <div class="stat-row">
-        <div class="stat-top">
-          <span>Hierro Hemínico</span>
-          <span class="iron-val-text" style="color:#dc2626; font-weight:800;">48% VDR</span>
-        </div>
-        <div class="progress-track">
-          <div class="progress-fill iron-bar-fill" style="width: 48%; background: #dc2626;"></div>
-        </div>
-      </div>
-
-      <div class="stat-row">
-        <div class="stat-top">
-          <span>Vitamina C</span>
-          <span class="vitc-val-text" style="color:#d97706; font-weight:800;">78% VDR</span>
-        </div>
-        <div class="progress-track">
-          <div class="progress-fill vitc-bar-fill" style="width: 78%; background: #f59e0b;"></div>
-        </div>
-      </div>
-
-      <div style="font-size:11px; color:var(--text-muted); background:var(--card-subtle); padding:8px 10px; border-radius:10px;">
-        📍 <strong style="color:var(--text-main);" id="pc-pickup-label">Puerta Principal - UC</strong><br>
-        ⚡ Listo en 10 - 15 min • Yape / WhatsApp
-      </div>
-
-      <button type="button" class="nav-btn nav-btn-next" id="btn-jump-pay" style="width:100%;">
-        Ir a Pagar (Paso 3) →
-      </button>
-
-      <button type="button" class="info-link-btn" id="btn-open-traceability-pc">
-        🔍 Origen de Insumos
-      </button>
     </aside>
   </main>
 
-  <!-- Modal de Pago Directo con Yape (994 013 003) -->
+  <!-- Modal de Pago Directo con Yape -->
   <div class="modal-backdrop" id="yape-modal">
     <div class="modal-card">
       <div style="display:flex; justify-content:space-between; align-items:center;">
-        <div style="display:flex; align-items:center; gap:8px;">
-          <span style="background:#742284; color:#fff; font-weight:800; font-size:11px; padding:3px 9px; border-radius:999px;">YAPE OFICIAL</span>
-          <h3 style="font-size:17px; font-weight:800;">Pago Rápido NUTIVA</h3>
+        <div>
+          <span style="background:#f3e8ff; color:#742284; font-size:10px; font-weight:800; padding:3px 8px; border-radius:999px;">PAGO RÁPIDO CON YAPE</span>
+          <h3 style="font-size:18px; font-weight:800; margin-top:4px;">Escanea o Yapea al Número</h3>
         </div>
-        <button type="button" class="modal-close-btn" id="btn-close-yape">✕</button>
+        <button type="button" id="btn-close-yape" style="border:none; background:var(--card-bg); color:var(--text-main); width:32px; height:32px; border-radius:50%; font-weight:800; cursor:pointer;">✕</button>
       </div>
 
-      <div class="yape-hero-box">
-        <div style="font-size:11.5px; font-weight:700; opacity:0.92;">Escanea el QR desde tu app Yape</div>
+      <!-- QR Estilizado de Yape en SVG limpio -->
+      <div class="yape-qr-frame" aria-label="Código QR Yape +51 902 182 049">
+        <svg viewBox="0 0 120 120" width="156" height="156">
+          <rect width="120" height="120" fill="#ffffff"/>
+          <rect x="8" y="8" width="30" height="30" rx="4" fill="none" stroke="#742284" stroke-width="5"/>
+          <rect x="16" y="16" width="14" height="14" rx="2" fill="#742284"/>
+          <rect x="82" y="8" width="30" height="30" rx="4" fill="none" stroke="#742284" stroke-width="5"/>
+          <rect x="90" y="16" width="14" height="14" rx="2" fill="#742284"/>
+          <rect x="8" y="82" width="30" height="30" rx="4" fill="none" stroke="#742284" stroke-width="5"/>
+          <rect x="16" y="90" width="14" height="14" rx="2" fill="#742284"/>
+          <rect x="46" y="10" width="6" height="6" fill="#1e1b24"/>
+          <rect x="58" y="10" width="12" height="6" fill="#1e1b24"/>
+          <rect x="46" y="22" width="6" height="12" fill="#1e1b24"/>
+          <rect x="64" y="24" width="6" height="10" fill="#1e1b24"/>
+          <rect x="10" y="46" width="12" height="6" fill="#1e1b24"/>
+          <rect x="28" y="46" width="8" height="12" fill="#1e1b24"/>
+          <rect x="10" y="60" width="10" height="12" fill="#1e1b24"/>
+          <rect x="82" y="46" width="12" height="6" fill="#1e1b24"/>
+          <rect x="100" y="46" width="10" height="14" fill="#1e1b24"/>
+          <rect x="82" y="62" width="14" height="8" fill="#1e1b24"/>
+          <rect x="46" y="82" width="12" height="6" fill="#1e1b24"/>
+          <rect x="64" y="82" width="8" height="14" fill="#1e1b24"/>
+          <rect x="46" y="96" width="10" height="14" fill="#1e1b24"/>
+          <rect x="82" y="82" width="14" height="12" fill="#1e1b24"/>
+          <rect x="100" y="96" width="12" height="14" fill="#1e1b24"/>
+          <rect x="44" y="44" width="32" height="32" rx="8" fill="#742284"/>
+          <text x="60" y="65" text-anchor="middle" fill="#ffffff" font-family="Plus Jakarta Sans, sans-serif" font-weight="800" font-size="13">yape</text>
+        </svg>
+      </div>
 
-        <!-- QR Estilizado de Yape en SVG limpio -->
-        <div class="yape-qr-frame" aria-label="Código QR Yape 994 013 003">
-          <svg width="154" height="154" viewBox="0 0 154 154" xmlns="http://www.w3.org/2000/svg">
-            <rect width="154" height="154" fill="#ffffff"/>
-            <!-- Esquinas QR -->
-            <rect x="10" y="10" width="36" height="36" rx="5" fill="none" stroke="#742284" stroke-width="6"/>
-            <rect x="20" y="20" width="16" height="16" rx="2" fill="#742284"/>
-            <rect x="108" y="10" width="36" height="36" rx="5" fill="none" stroke="#742284" stroke-width="6"/>
-            <rect x="118" y="20" width="16" height="16" rx="2" fill="#742284"/>
-            <rect x="10" y="108" width="36" height="36" rx="5" fill="none" stroke="#742284" stroke-width="6"/>
-            <rect x="20" y="118" width="16" height="16" rx="2" fill="#742284"/>
-            <!-- Matriz QR -->
-            <g fill="#1e1b24">
-              <rect x="56" y="12" width="8" height="8"/><rect x="72" y="12" width="8" height="8"/><rect x="88" y="12" width="8" height="8"/>
-              <rect x="56" y="28" width="8" height="8"/><rect x="80" y="28" width="8" height="8"/><rect x="96" y="28" width="8" height="8"/>
-              <rect x="64" y="44" width="8" height="8"/><rect x="88" y="44" width="8" height="8"/>
-              <rect x="12" y="56" width="8" height="8"/><rect x="28" y="56" width="8" height="8"/><rect x="44" y="56" width="8" height="8"/>
-              <rect x="112" y="56" width="8" height="8"/><rect x="136" y="56" width="8" height="8"/>
-              <rect x="20" y="72" width="8" height="8"/><rect x="36" y="72" width="8" height="8"/>
-              <rect x="108" y="72" width="8" height="8"/><rect x="128" y="72" width="8" height="8"/>
-              <rect x="12" y="88" width="8" height="8"/><rect x="44" y="88" width="8" height="8"/>
-              <rect x="116" y="88" width="8" height="8"/><rect x="136" y="88" width="8" height="8"/>
-              <rect x="56" y="108" width="8" height="8"/><rect x="72" y="108" width="8" height="8"/><rect x="96" y="108" width="8" height="8"/>
-              <rect x="64" y="124" width="8" height="8"/><rect x="88" y="124" width="8" height="8"/><rect x="112" y="124" width="8" height="8"/>
-              <rect x="56" y="138" width="8" height="8"/><rect x="80" y="138" width="8" height="8"/><rect x="128" y="138" width="8" height="8"/>
-            </g>
-            <!-- Emblema central Yape -->
-            <rect x="55" y="55" width="44" height="44" rx="11" fill="#742284"/>
-            <text x="77" y="82" text-anchor="middle" fill="#ffffff" font-family="Plus Jakarta Sans, sans-serif" font-weight="800" font-size="14">yape</text>
-          </svg>
-        </div>
-
-        <div>
-          <div style="font-size:11px; opacity:0.9;">Monto exacto a yapear:</div>
-          <div style="font-size:26px; font-weight:800; letter-spacing:-0.02em;" id="yape-modal-amount">S/ 5.00</div>
-          <div style="font-size:11px; opacity:0.9; margin-top:2px;">Titular: <strong>NUTIVA • NutriPack Express</strong></div>
-        </div>
+      <div style="text-align:center;">
+        <div style="font-size:11px; font-weight:700; color:var(--text-muted);">MONTO EXACTO A YAPEAR</div>
+        <div style="font-size:26px; font-weight:800; color:#742284;" id="yape-amount-text">S/ 5.00</div>
       </div>
 
       <div class="yape-number-bar">
         <div>
           <div style="font-size:10px; font-weight:700; color:var(--text-muted); text-transform:uppercase;">Número Yape Directo</div>
-          <div style="font-size:17px; font-weight:800; letter-spacing:0.03em;" id="yape-number-text">994 013 003</div>
+          <div style="font-size:17px; font-weight:800; letter-spacing:0.03em;" id="yape-number-text">+51 902 182 049</div>
         </div>
         <button type="button" class="btn-copy-yape" id="btn-copy-yape">📋 Copiar número</button>
       </div>
 
-      <a href="#" target="_blank" class="cta-wa" id="yape-confirm-wa-btn">
-        <span>📲 Enviar captura del yapeo por WhatsApp</span>
+      <a href="#" target="_blank" rel="noopener noreferrer" class="cta-wa" id="yape-confirm-wa-btn">
+        <span>📲 Enviar Captura de Yape por WhatsApp</span>
       </a>
     </div>
   </div>
 
-  <!-- Modal de Transparencia y Ficha Técnica por Paquete -->
+  <!-- Modal de Transparencia y Trazabilidad -->
   <div class="modal-backdrop" id="traceability-modal">
-    <div class="modal-card" style="max-width:520px;">
+    <div class="modal-card">
       <div style="display:flex; justify-content:space-between; align-items:center;">
         <div>
           <span class="mvp-tag">Transparencia y Calidad NUTIVA</span>
           <h3 style="font-size:17px; font-weight:800; margin-top:4px;">Origen de Insumos y Logística Express</h3>
         </div>
-        <button type="button" class="modal-close-btn" id="btn-close-modal">✕</button>
+        <button type="button" id="btn-close-modal" style="border:none; background:var(--card-bg); color:var(--text-main); width:32px; height:32px; border-radius:50%; font-weight:800; cursor:pointer;">✕</button>
       </div>
 
       <div class="modal-grid">
@@ -1803,20 +1684,20 @@
         </div>
         <div class="modal-item">
           <h4>🍍 Frutas Deshidratadas</h4>
-          <p><strong>100 % Naturales:</strong> Fresa, papaya, piña, naranja y aguaymanto seleccionados de productores del Valle del Mantaro y Satipo, sin conservantes.</p>
+          <p><strong>100 % Naturales:</strong> Fresa, papaya, piña, naranja y aguaymanto seleccionados de productores del Valle del Mantaro y Satipo.</p>
         </div>
         <div class="modal-item">
           <h4>🍫 Chispas y Semillas</h4>
-          <p><strong>Origen trazable:</strong> Cacao puro al 70 % de la selva central (Satipo) y semillas andinas tostadas artesanalmente.</p>
+          <p><strong>Origen trazable:</strong> Cacao puro al 70 % de Satipo y semillas andinas tostadas artesanalmente.</p>
         </div>
         <div class="modal-item">
           <h4>⚡ Recojo en 10-15 Minutos</h4>
-          <p><strong>Stock listo en campus:</strong> Al pedir por WhatsApp o Yape (+51 994 013 003), asignamos tu pack armado y lo recoges sin filas en tu pabellón.</p>
+          <p><strong>Stock listo en campus:</strong> Al pedir por WhatsApp o Yape (+51 902 182 049), asignamos tu pack armado y lo recoges sin filas.</p>
         </div>
       </div>
 
-      <div style="background:var(--accent-soft); padding:11px 13px; border-radius:12px; font-size:11.5px; color:var(--accent-dark); font-weight:600; border:1px solid var(--accent-border);">
-        📦 <strong>Identidad y Sostenibilidad:</strong> Empaque de cartón kraft grado alimenticio 100 % biodegradable con logotipo exterior NUTIVA y código QR de pedido directo.
+      <div class="synergy-note">
+        📦 <strong>Identidad y Sostenibilidad:</strong> Empaque de cartón kraft grado alimenticio 100 % biodegradable con logotipo exterior NUTIVA y código QR.
       </div>
     </div>
   </div>
@@ -1827,13 +1708,13 @@
     import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
 
     // --- ESCENA Y RENDERER HDRI ---
-    const appStage = document.getElementById('app-stage');
+    const stageEl = document.getElementById('app-stage');
     const container = document.getElementById('canvas-container');
     const scene = new THREE.Scene();
     scene.background = new THREE.Color(0xf7f8fa);
 
     const camera = new THREE.PerspectiveCamera(38, container.clientWidth / container.clientHeight, 0.1, 100);
-    camera.position.set(0.3, 4.6, 5.4);
+    camera.position.set(0.35, 4.6, 5.4);
 
     const renderer = new THREE.WebGLRenderer({ antialias: true, powerPreference: 'high-performance' });
     renderer.setSize(container.clientWidth, container.clientHeight);
@@ -1847,109 +1728,44 @@
     const pmremGenerator = new THREE.PMREMGenerator(renderer);
     scene.environment = pmremGenerator.fromScene(new RoomEnvironment(), 0.04).texture;
 
-    // --- CONTROLES DE ÓRBITA, ILUMINACIÓN Y PLANO DE SOMBRAS ---
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.42);
+    scene.add(ambientLight);
+
+    const keyLight = new THREE.DirectionalLight(0xfffcf5, 1.35);
+    keyLight.position.set(4.5, 8.5, 5.0);
+    keyLight.castShadow = true;
+    keyLight.shadow.mapSize.width = 2048;
+    keyLight.shadow.mapSize.height = 2048;
+    keyLight.shadow.camera.near = 1;
+    keyLight.shadow.camera.far = 22;
+    const d = 4.2;
+    keyLight.shadow.camera.left = -d;
+    keyLight.shadow.camera.right = d;
+    keyLight.shadow.camera.top = d;
+    keyLight.shadow.camera.bottom = -d;
+    keyLight.shadow.bias = -0.0005;
+    scene.add(keyLight);
+
+    const fillLight = new THREE.DirectionalLight(0xeef6ff, 0.6);
+    fillLight.position.set(-5.0, 4.0, -3.5);
+    scene.add(fillLight);
+
     const controls = new OrbitControls(camera, renderer.domElement);
     controls.enableDamping = true;
     controls.dampingFactor = 0.06;
-    controls.target.set(0, 0.45, 0);
-    controls.minDistance = 2.2;
-    controls.maxDistance = 12;
-    controls.maxPolarAngle = Math.PI / 2 - 0.02;
-    controls.update();
+    controls.minDistance = 2.4;
+    controls.maxDistance = 10.5;
+    controls.maxPolarAngle = Math.PI / 2 - 0.04;
+    controls.target.set(-0.25, 0.45, 0);
 
-    controls.addEventListener('start', () => {
-      targetCamPos = null;
-      targetLookAt = null;
-    });
+    const floorMat = new THREE.ShadowMaterial({ opacity: 0.16 });
+    const floor = new THREE.Mesh(new THREE.PlaneGeometry(30, 30), floorMat);
+    floor.rotation.x = -Math.PI / 2;
+    floor.receiveShadow = true;
+    scene.add(floor);
 
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.38);
-    scene.add(ambientLight);
-
-    const dirLight = new THREE.DirectionalLight(0xfffdf8, 1.35);
-    dirLight.position.set(4.5, 8.5, 5.5);
-    dirLight.castShadow = true;
-    dirLight.shadow.mapSize.width = 2048;
-    dirLight.shadow.mapSize.height = 2048;
-    dirLight.shadow.camera.near = 1;
-    dirLight.shadow.camera.far = 22;
-    const shadowBound = 4.5;
-    dirLight.shadow.camera.left = -shadowBound;
-    dirLight.shadow.camera.right = shadowBound;
-    dirLight.shadow.camera.top = shadowBound;
-    dirLight.shadow.camera.bottom = -shadowBound;
-    dirLight.shadow.bias = -0.0005;
-    scene.add(dirLight);
-
-    const fillLight = new THREE.DirectionalLight(0xeef6ff, 0.35);
-    fillLight.position.set(-5, 4, -4);
-    scene.add(fillLight);
-
-    const floorMaterial = new THREE.ShadowMaterial({ opacity: 0.14 });
-    const floorMesh = new THREE.Mesh(new THREE.PlaneGeometry(30, 30), floorMaterial);
-    floorMesh.rotation.x = -Math.PI / 2;
-    floorMesh.receiveShadow = true;
-    scene.add(floorMesh);
-
-    // --- CONTROLES DE APARIENCIA ETIQUETADOS (PERSONALIZACIÓN Y VISTA) ---
-    const personalizacionDropdown = document.getElementById('personalizacion-dropdown');
-    const btnTogglePersonalizacion = document.getElementById('btn-toggle-personalizacion');
-    const indicatorBgDot = document.getElementById('indicator-bg-dot');
-    const indicatorThemeDot = document.getElementById('indicator-theme-dot');
-
-    function setPersonalizacionOpen(isOpen) {
-      personalizacionDropdown.classList.toggle('open', isOpen);
-      btnTogglePersonalizacion.setAttribute('aria-expanded', String(isOpen));
-    }
-
-    btnTogglePersonalizacion.addEventListener('click', (e) => {
-      e.stopPropagation();
-      const willOpen = !personalizacionDropdown.classList.contains('open');
-      setPersonalizacionOpen(willOpen);
-    });
-
-    document.addEventListener('click', (e) => {
-      if (!personalizacionDropdown.contains(e.target)) {
-        setPersonalizacionOpen(false);
-      }
-    });
-
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') {
-        setPersonalizacionOpen(false);
-      }
-    });
-
-    function applyBackground(bgVal) {
-      state.bg = bgVal;
-      document.body.setAttribute('data-bg', bgVal);
-      document.querySelectorAll('[data-bg-val]').forEach(btn => {
-        btn.classList.toggle('active', btn.dataset.bgVal === bgVal);
-      });
-
-      if (bgVal === 'dark') {
-        indicatorBgDot.style.background = '#121513';
-        scene.background = new THREE.Color(0x121513);
-        ambientLight.intensity = 0.56;
-        floorMaterial.opacity = 0.34;
-      } else {
-        indicatorBgDot.style.background = '#f7f8fa';
-        scene.background = new THREE.Color(0xf7f8fa);
-        ambientLight.intensity = 0.38;
-        floorMaterial.opacity = 0.14;
-      }
-    }
-
-    function applyTheme(themeVal) {
-      state.theme = themeVal;
-      document.body.setAttribute('data-theme', themeVal);
-      document.querySelectorAll('[data-theme-val]').forEach(btn => {
-        btn.classList.toggle('active', btn.dataset.themeVal === themeVal);
-      });
-      indicatorThemeDot.style.background = themeVal === 'autumn' ? '#c2410c' : '#2e7d32';
-    }
-
-    // --- GENERADOR DE TEXTURAS PROCEDURALES (CARTÓN KRAFT, GALLETA Y PAPEL) ---
-    function createNoiseCanvas(width, height, baseRGB, variance, fiberCount) {
+    // --- GENERADORES DE TEXTURAS PBR PROCEDURALES ---
+    function createNoiseCanvas(width, height, baseRGB, variance, fiberCount = 0) {
       const canvas = document.createElement('canvas');
       canvas.width = width;
       canvas.height = height;
@@ -1958,10 +1774,10 @@
       const data = imgData.data;
 
       for (let i = 0; i < data.length; i += 4) {
-        const delta = (Math.random() - 0.5) * variance;
-        data[i] = Math.min(255, Math.max(0, baseRGB[0] + delta));
-        data[i + 1] = Math.min(255, Math.max(0, baseRGB[1] + delta));
-        data[i + 2] = Math.min(255, Math.max(0, baseRGB[2] + delta));
+        const n = (Math.random() - 0.5) * variance;
+        data[i] = Math.min(255, Math.max(0, baseRGB[0] + n));
+        data[i + 1] = Math.min(255, Math.max(0, baseRGB[1] + n));
+        data[i + 2] = Math.min(255, Math.max(0, baseRGB[2] + n));
         data[i + 3] = 255;
       }
       ctx.putImageData(imgData, 0, 0);
@@ -1991,7 +1807,7 @@
       metalness: 0.02
     });
 
-    // --- TEXTURA EXTERIOR DE LA TAPA CON LOGO OFICIAL NUTIVA + TRAZABILIDAD ---
+    // Textura Exterior de la Tapa (Logo NUTIVA + Yape/WhatsApp +51 902 182 049)
     function createOuterLidTexture() {
       const canvas = document.createElement('canvas');
       canvas.width = 1024;
@@ -2000,7 +1816,6 @@
 
       ctx.drawImage(kraftColorTex.image, 0, 0, 1024, 680);
 
-      // Doble marco ecológico impreso en tinta verde bosque
       ctx.strokeStyle = '#1b5e20';
       ctx.lineWidth = 8;
       ctx.strokeRect(36, 36, 952, 608);
@@ -2009,13 +1824,11 @@
       ctx.lineWidth = 3;
       ctx.strokeRect(52, 52, 920, 576);
 
-      // Emblema circular central suave
       ctx.fillStyle = 'rgba(255, 255, 255, 0.24)';
       ctx.beginPath();
       ctx.ellipse(512, 295, 340, 175, 0, 0, Math.PI * 2);
       ctx.fill();
 
-      // Hojas decorativas sobre la I de NUTIVA
       ctx.fillStyle = '#2e7d32';
       ctx.beginPath();
       ctx.ellipse(552, 168, 28, 13, -Math.PI / 5, 0, Math.PI * 2);
@@ -2025,13 +1838,11 @@
       ctx.ellipse(592, 174, 23, 10, Math.PI / 4, 0, Math.PI * 2);
       ctx.fill();
 
-      // Logotipo principal NUTIVA
       ctx.fillStyle = '#1b5e20';
       ctx.font = '800 132px "Plus Jakarta Sans", sans-serif';
       ctx.textAlign = 'center';
       ctx.fillText('NUTIVA', 512, 290);
 
-      // Cinta verde con nombre del producto
       ctx.fillStyle = '#1b5e20';
       ctx.beginPath();
       ctx.roundRect(272, 322, 480, 52, 26);
@@ -2041,7 +1852,6 @@
       ctx.font = '800 26px "Plus Jakarta Sans", sans-serif';
       ctx.fillText('NUTRIPACK EXPRESS • PMV FINAL', 512, 357);
 
-      // Sellos de transparencia y origen natural
       ctx.fillStyle = '#261e16';
       ctx.font = '700 24px "Plus Jakarta Sans", sans-serif';
       ctx.fillText('Galletas de Sangrecita + Frutas Deshidratadas Naturales', 512, 432);
@@ -2050,10 +1860,9 @@
       ctx.font = '700 20px "Plus Jakarta Sans", sans-serif';
       ctx.fillText('100 % Insumos Artesanales de Huancayo • Bajo en Azúcar • Biodegradable', 512, 476);
 
-      // Pie de contacto rápido actualizado a 994 013 003
       ctx.fillStyle = '#3b2f24';
       ctx.font = '600 20px "Plus Jakarta Sans", sans-serif';
-      ctx.fillText('WhatsApp / Yape Express: +51 994 013 003 • Campus UC', 512, 578);
+      ctx.fillText('WhatsApp / Yape Express: +51 902 182 049 • Campus UC', 512, 578);
 
       const tex = new THREE.CanvasTexture(canvas);
       tex.colorSpace = THREE.SRGBColorSpace;
@@ -2067,7 +1876,6 @@
       roughness: 0.82
     });
 
-    // --- TEXTURA FRONTAL EXTERIOR DE LA CAJA (BRANDING VISIBLE DE FRENTE) ---
     function createFrontWallTexture() {
       const canvas = document.createElement('canvas');
       canvas.width = 1024;
@@ -2106,7 +1914,6 @@
       roughness: 0.84
     });
 
-    // --- TEXTURA INTERIOR DE LA TAPA ---
     function createLidInnerTexture(subtitleText) {
       const canvas = document.createElement('canvas');
       canvas.width = 1024;
@@ -2137,7 +1944,6 @@
       ctx.font = '700 30px "Plus Jakarta Sans", sans-serif';
       ctx.fillText(subtitleText, 512, 302);
 
-      // QR Code
       const qrSize = 152;
       const qrX = 512 - qrSize / 2;
       const qrY = 338;
@@ -2158,7 +1964,7 @@
 
       ctx.fillStyle = '#2b241d';
       ctx.font = '700 23px "Plus Jakarta Sans", sans-serif';
-      ctx.fillText('Yape / WhatsApp: +51 994 013 003 • Recojo en 10 min', 512, 542);
+      ctx.fillText('Yape / WhatsApp: +51 902 182 049 • Recojo en 10 min', 512, 542);
 
       ctx.fillStyle = '#24582a';
       ctx.font = '600 19px "Plus Jakarta Sans", sans-serif';
@@ -2169,14 +1975,13 @@
       return tex;
     }
 
-    let lidInnerMat = new THREE.MeshStandardMaterial({
+    const lidInnerMat = new THREE.MeshStandardMaterial({
       map: createLidInnerTexture('NUTRIPACK EXPRESS • RECOJO RÁPIDO'),
       bumpMap: kraftBumpTex,
       bumpScale: 0.012,
       roughness: 0.84
     });
 
-    // Texturas Galleta y Papel
     const cookieColorTex = new THREE.CanvasTexture(createNoiseCanvas(512, 512, [82, 49, 35], 30, 400));
     cookieColorTex.colorSpace = THREE.SRGBColorSpace;
     const cookieBumpTex = new THREE.CanvasTexture(createNoiseCanvas(512, 512, [128, 128, 128], 85, 600));
@@ -2201,7 +2006,7 @@
       side: THREE.DoubleSide
     });
 
-    // --- CONSTRUCCIÓN DE LA CAJA BIODEGRADABLE CON IDENTIDAD VISUAL ---
+    // --- CONSTRUCCIÓN DE LA CAJA 3D ---
     const boxGroup = new THREE.Group();
     scene.add(boxGroup);
 
@@ -2216,7 +2021,6 @@
     baseMesh.receiveShadow = true;
     boxGroup.add(baseMesh);
 
-    // Pared frontal con logotipo NUTIVA visible al frente (+Z es índice 4)
     const frontWall = new THREE.Mesh(
       new THREE.BoxGeometry(W, H, T),
       [kraftMaterial, kraftMaterial, kraftMaterial, kraftMaterial, frontWallBrandingMat, kraftMaterial]
@@ -2244,7 +2048,6 @@
     rightWall.receiveShadow = true;
     boxGroup.add(rightWall);
 
-    // Separador central
     const divider = new THREE.Mesh(new THREE.BoxGeometry(T * 0.9, H * 0.94, D - T * 2), kraftMaterial);
     divider.position.set(0, H * 0.47, 0);
     divider.castShadow = true;
@@ -2285,7 +2088,6 @@
     boxGroup.add(createLiner(-W / 4));
     boxGroup.add(createLiner(W / 4));
 
-    // Tapa Abatible: +Y (índice 2) lleva el LOGO EXTERIOR; -Y (índice 3) lleva el LOGO INTERIOR + QR
     const lidPivot = new THREE.Group();
     lidPivot.position.set(0, H, -D / 2 + T / 2);
     boxGroup.add(lidPivot);
@@ -2307,13 +2109,14 @@
     let targetLidAngle = -1.78;
     lidPivot.rotation.x = targetLidAngle;
 
-    // --- GALLETAS EN FORMA DE CORAZÓN (NUEVO PMV) Y REDONDAS ---
+    // --- GALLETAS CORAZÓN Y RÚSTICAS ---
     const cookiesGroup = new THREE.Group();
     boxGroup.add(cookiesGroup);
 
     function createHeartCookieGeometry() {
       const heartShape = new THREE.Shape();
-      const x = 0, y = 0;
+      const x = 0;
+      const y = 0;
       heartShape.moveTo(x, y + 0.11);
       heartShape.bezierCurveTo(x, y + 0.11, x - 0.05, y + 0.25, x - 0.18, y + 0.25);
       heartShape.bezierCurveTo(x - 0.35, y + 0.25, x - 0.35, y + 0.04, x - 0.35, y + 0.04);
@@ -2322,16 +2125,14 @@
       heartShape.bezierCurveTo(x + 0.35, y + 0.04, x + 0.35, y + 0.25, x + 0.18, y + 0.25);
       heartShape.bezierCurveTo(x + 0.05, y + 0.25, x, y + 0.11, x, y + 0.11);
 
-      const extrudeSettings = {
+      const geo = new THREE.ExtrudeGeometry(heartShape, {
         depth: 0.075,
         bevelEnabled: true,
         bevelSegments: 4,
         steps: 1,
         bevelSize: 0.028,
         bevelThickness: 0.028
-      };
-
-      const geo = new THREE.ExtrudeGeometry(heartShape, extrudeSettings);
+      });
       geo.rotateX(-Math.PI / 2);
       geo.center();
 
@@ -2356,7 +2157,6 @@
         const vz = pos.getZ(i);
         const angle = Math.atan2(vz, vx);
         const dist = Math.sqrt(vx * vx + vz * vz);
-
         const edgeNoise = Math.sin(angle * 5) * 0.015 + Math.cos(angle * 9) * 0.01 + (Math.random() - 0.5) * 0.007;
         if (dist > radius * 0.35) {
           pos.setX(i, vx + Math.cos(angle) * edgeNoise);
@@ -2431,7 +2231,7 @@
       });
     }
 
-    // --- FRUTAS DESHIDRATADAS AMPLIADAS (PAPAYA, PIÑA, NARANJA, FRESA, MANGO, PLÁTANO) ---
+    // --- FRUTAS DESHIDRATADAS ---
     const fruitsGroup = new THREE.Group();
     boxGroup.add(fruitsGroup);
 
@@ -2463,60 +2263,14 @@
     }
 
     const fruitMaterials = {
-      banana: new THREE.MeshStandardMaterial({
-        color: 0xf4e1b6,
-        bumpMap: cookieBumpTex,
-        bumpScale: 0.008,
-        roughness: 0.58
-      }),
-      mango: new THREE.MeshPhysicalMaterial({
-        color: 0xf59e0b,
-        bumpMap: kraftBumpTex,
-        bumpScale: 0.014,
-        roughness: 0.42,
-        clearcoat: 0.25
-      }),
-      papaya: new THREE.MeshPhysicalMaterial({
-        color: 0xe85d2a,
-        bumpMap: cookieBumpTex,
-        bumpScale: 0.018,
-        roughness: 0.38,
-        clearcoat: 0.32
-      }),
-      pina: new THREE.MeshPhysicalMaterial({
-        color: 0xfacc15,
-        bumpMap: kraftBumpTex,
-        bumpScale: 0.02,
-        roughness: 0.45,
-        clearcoat: 0.2
-      }),
-      naranja: new THREE.MeshStandardMaterial({
-        map: createOrangeSliceTexture(),
-        bumpMap: cookieBumpTex,
-        bumpScale: 0.015,
-        roughness: 0.5
-      }),
-      aguaymanto: new THREE.MeshPhysicalMaterial({
-        color: 0xd96612,
-        bumpMap: cookieBumpTex,
-        bumpScale: 0.025,
-        roughness: 0.36,
-        clearcoat: 0.35
-      }),
-      pasa: new THREE.MeshPhysicalMaterial({
-        color: 0x331d27,
-        bumpMap: cookieBumpTex,
-        bumpScale: 0.028,
-        roughness: 0.32,
-        clearcoat: 0.4
-      }),
-      fresa: new THREE.MeshPhysicalMaterial({
-        color: 0xc81e32,
-        bumpMap: cookieBumpTex,
-        bumpScale: 0.015,
-        roughness: 0.46,
-        clearcoat: 0.24
-      })
+      banana: new THREE.MeshStandardMaterial({ color: 0xf4e1b6, bumpMap: cookieBumpTex, bumpScale: 0.008, roughness: 0.58 }),
+      mango: new THREE.MeshPhysicalMaterial({ color: 0xf59e0b, bumpMap: kraftBumpTex, bumpScale: 0.014, roughness: 0.42, clearcoat: 0.25 }),
+      papaya: new THREE.MeshPhysicalMaterial({ color: 0xe85d2a, bumpMap: cookieBumpTex, bumpScale: 0.018, roughness: 0.38, clearcoat: 0.32 }),
+      pina: new THREE.MeshPhysicalMaterial({ color: 0xfacc15, bumpMap: kraftBumpTex, bumpScale: 0.02, roughness: 0.45, clearcoat: 0.2 }),
+      naranja: new THREE.MeshStandardMaterial({ map: createOrangeSliceTexture(), bumpMap: cookieBumpTex, bumpScale: 0.015, roughness: 0.5 }),
+      aguaymanto: new THREE.MeshPhysicalMaterial({ color: 0xd96612, bumpMap: cookieBumpTex, bumpScale: 0.025, roughness: 0.36, clearcoat: 0.35 }),
+      pasa: new THREE.MeshPhysicalMaterial({ color: 0x331d27, bumpMap: cookieBumpTex, bumpScale: 0.028, roughness: 0.32, clearcoat: 0.4 }),
+      fresa: new THREE.MeshPhysicalMaterial({ color: 0xc81e32, bumpMap: cookieBumpTex, bumpScale: 0.015, roughness: 0.46, clearcoat: 0.24 })
     };
 
     function createFruitMesh(type) {
@@ -2524,7 +2278,8 @@
         const geo = new THREE.CylinderGeometry(0.18, 0.18, 0.028, 22);
         const pos = geo.attributes.position;
         for (let i = 0; i < pos.count; i++) {
-          const x = pos.getX(i), z = pos.getZ(i);
+          const x = pos.getX(i);
+          const z = pos.getZ(i);
           pos.setY(i, pos.getY(i) + (x * x + z * z) * 0.45);
         }
         geo.computeVertexNormals();
@@ -2536,7 +2291,8 @@
         const geo = new THREE.BoxGeometry(0.38, 0.026, 0.14, 10, 2, 4);
         const pos = geo.attributes.position;
         for (let i = 0; i < pos.count; i++) {
-          const x = pos.getX(i), z = pos.getZ(i);
+          const x = pos.getX(i);
+          const z = pos.getZ(i);
           pos.setY(i, pos.getY(i) + Math.sin(x * 11) * 0.024 + z * 0.12);
         }
         geo.computeVertexNormals();
@@ -2572,7 +2328,9 @@
         const geo = new THREE.SphereGeometry(0.105, 16, 14);
         const pos = geo.attributes.position;
         for (let i = 0; i < pos.count; i++) {
-          const x = pos.getX(i), y = pos.getY(i), z = pos.getZ(i);
+          const x = pos.getX(i);
+          const y = pos.getY(i);
+          const z = pos.getZ(i);
           const wrinkle = 1 + Math.sin(x * 35) * 0.06 + Math.cos(z * 35) * 0.06;
           pos.setXYZ(i, x * wrinkle, y * 0.78 * wrinkle, z * wrinkle);
         }
@@ -2588,13 +2346,11 @@
         m.castShadow = true;
         return m;
       }
-      if (type === 'fresa') {
-        const geo = new THREE.CylinderGeometry(0.16, 0.16, 0.024, 18);
-        geo.scale(1.15, 1, 0.88);
-        const m = new THREE.Mesh(geo, fruitMaterials.fresa);
-        m.castShadow = true;
-        return m;
-      }
+      const geo = new THREE.CylinderGeometry(0.16, 0.16, 0.024, 18);
+      geo.scale(1.15, 1, 0.88);
+      const m = new THREE.Mesh(geo, fruitMaterials.fresa);
+      m.castShadow = true;
+      return m;
     }
 
     const fruitMixConfigs = {
@@ -2646,7 +2402,7 @@
       });
     }
 
-    // --- BOTELLA DE BEBIDA NATURAL OPCIONAL ---
+    // --- BOTELLA BEBIDA NATURAL OPCIONAL ---
     const bottleGroup = new THREE.Group();
     bottleGroup.position.set(2.35, 0, -0.15);
     bottleGroup.visible = false;
@@ -2697,16 +2453,15 @@
     labelMesh.rotation.y = -Math.PI / 2.2;
     bottleGroup.add(labelMesh);
 
-    // Inicializar por defecto con las mejoras del PMV Final
     buildCookies('avena', 'heart');
     buildFruits('fresa_papaya');
 
-    // --- ESTADO DE LA APLICACIÓN ---
+    // --- ESTADO GLOBAL Y LÓGICA DE INTERFAZ ---
     const state = {
       step: 1,
-      bg: 'light',
-      theme: 'green',
-      viewMode: window.innerWidth <= 860 ? 'mobile' : 'pc',
+      bg: 'white',
+      theme: 'leaf',
+      viewMode: 'desktop',
       shape: 'heart',
       mix: 'fresa_papaya',
       topping: 'avena',
@@ -2753,140 +2508,261 @@
     };
 
     const toppingNames = { avena: 'Avena Suave', cacao: 'Cacao 70%', semillas: 'Semillas Andinas' };
-    const shapeNames = { heart: 'Corazón', round: 'Rústica' };
+    const shapeNames = { heart: '❤️ Corazón', round: '🍪 Rústica' };
 
-    // --- VISTAS DE CÁMARA Y ZOOM AUTOMÁTICO ---
+    // --- MENÚ DESPLEGABLE PERSONALIZACIÓN (FONDO + TEMA) ---
+    const dropdownWrap = document.getElementById('personalizacion-dropdown');
+    const btnPersonalizacion = document.getElementById('btn-personalizacion');
+    const menuPersonalizacion = document.getElementById('personalizacion-menu');
+    const swatchBg = document.getElementById('swatch-bg');
+    const swatchTheme = document.getElementById('swatch-theme');
+
+    function setPersonalizacionOpen(isOpen) {
+      btnPersonalizacion.classList.toggle('open', isOpen);
+      btnPersonalizacion.setAttribute('aria-expanded', String(isOpen));
+      menuPersonalizacion.classList.toggle('open', isOpen);
+    }
+
+    btnPersonalizacion.addEventListener('click', (e) => {
+      e.stopPropagation();
+      setPersonalizacionOpen(!menuPersonalizacion.classList.contains('open'));
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!dropdownWrap.contains(e.target)) {
+        setPersonalizacionOpen(false);
+      }
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        setPersonalizacionOpen(false);
+        yapeModal.classList.remove('open');
+        traceModal.classList.remove('open');
+      }
+    });
+
+    function applyBackground(bgMode) {
+      state.bg = bgMode;
+      document.body.classList.toggle('bg-dark', bgMode === 'dark');
+      const hex = bgMode === 'dark' ? 0x111513 : 0xf7f8fa;
+      scene.background = new THREE.Color(hex);
+      floorMat.opacity = bgMode === 'dark' ? 0.35 : 0.16;
+      swatchBg.style.background = bgMode === 'dark' ? '#181e1b' : '#f7f8fa';
+      document.querySelectorAll('#bg-controls .seg-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.bg === bgMode);
+      });
+    }
+
+    document.querySelectorAll('#bg-controls .seg-btn').forEach(btn => {
+      btn.addEventListener('click', () => applyBackground(btn.dataset.bg));
+    });
+
+    function applyTheme(themeMode) {
+      state.theme = themeMode;
+      document.body.classList.remove('theme-leaf', 'theme-autumn');
+      document.body.classList.add(`theme-${themeMode}`);
+      swatchTheme.style.background = themeMode === 'autumn' ? '#c2410c' : '#2e7d32';
+      document.querySelectorAll('#theme-controls .seg-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.theme === themeMode);
+      });
+    }
+
+    document.querySelectorAll('#theme-controls .seg-btn').forEach(btn => {
+      btn.addEventListener('click', () => applyTheme(btn.dataset.theme));
+    });
+
+    // --- VISTA PC / MÓVIL Y SINCRONIZACIÓN DE VIEWPORT REAL ---
+    function syncViewportHeight() {
+      const vh = window.visualViewport ? window.visualViewport.height : window.innerHeight;
+      document.documentElement.style.setProperty('--vh-full', `${vh}px`);
+    }
+
+    function syncRendererSize() {
+      syncViewportHeight();
+      const w = container.clientWidth || window.innerWidth;
+      const h = container.clientHeight || window.innerHeight;
+      camera.aspect = w / h;
+      camera.updateProjectionMatrix();
+      renderer.setSize(w, h);
+    }
+
+    if (window.visualViewport) {
+      window.visualViewport.addEventListener('resize', syncRendererSize);
+      window.visualViewport.addEventListener('scroll', syncViewportHeight);
+    }
+    syncViewportHeight();
+
+    function applyViewMode(mode, isDesktopSim = false) {
+      state.viewMode = mode;
+      const isMobile = mode === 'mobile';
+      document.body.classList.toggle('mobile-mode', isMobile);
+      document.body.classList.toggle('desktop-sim', isMobile && isDesktopSim);
+
+      // En móvil, mover precio y botones al final del scroll de cada paso; en PC, mantenerlos fijos abajo
+      const wizardPanel = document.getElementById('wizard-panel');
+      const wizardBody = document.getElementById('wizard-body');
+      const wizardFooter = document.getElementById('wizard-footer');
+      if (wizardPanel && wizardBody && wizardFooter) {
+        if (isMobile && wizardFooter.parentElement !== wizardBody) {
+          wizardBody.appendChild(wizardFooter);
+        } else if (!isMobile && wizardFooter.parentElement !== wizardPanel) {
+          wizardPanel.appendChild(wizardFooter);
+        }
+      }
+
+      document.querySelectorAll('#vista-control-group .seg-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.mode === mode);
+      });
+
+      controls.target.set(isMobile ? 0 : -0.25, 0.45, 0);
+      setTimeout(syncRendererSize, 30);
+    }
+
+    document.querySelectorAll('#vista-control-group .seg-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const mode = btn.dataset.mode;
+        applyViewMode(mode, mode === 'mobile' && window.innerWidth > 820);
+      });
+    });
+
+    if (window.innerWidth <= 820) {
+      applyViewMode('mobile', false);
+    }
+
+    // --- NAVEGACIÓN DE 3 PASOS ---
+    function goToStep(stepNum) {
+      state.step = Math.min(3, Math.max(1, stepNum));
+
+      document.querySelectorAll('.step-tab').forEach(tab => {
+        const s = Number(tab.dataset.step);
+        tab.classList.toggle('active', s === state.step);
+        tab.classList.toggle('completed', s < state.step);
+      });
+
+      document.querySelectorAll('.step-view').forEach(view => {
+        view.classList.toggle('active', view.id === `step-${state.step}`);
+      });
+
+      document.getElementById('wizard-progress-fill').style.width = `${(state.step / 3) * 100}%`;
+      document.getElementById('btn-prev-step').disabled = state.step === 1;
+
+      const nextBtn = document.getElementById('btn-next-step');
+      if (state.step === 1) {
+        nextBtn.textContent = 'Plan y Recojo →';
+        nextBtn.style.display = 'inline-block';
+      } else if (state.step === 2) {
+        nextBtn.textContent = 'Ir a Pagar →';
+        nextBtn.style.display = 'inline-block';
+      } else {
+        nextBtn.style.display = 'none';
+      }
+
+      document.getElementById('wizard-body').scrollTop = 0;
+      updateUI();
+    }
+
+    document.querySelectorAll('.step-tab').forEach(tab => {
+      tab.addEventListener('click', () => goToStep(Number(tab.dataset.step)));
+    });
+
+    document.getElementById('btn-prev-step').addEventListener('click', () => goToStep(state.step - 1));
+    document.getElementById('btn-next-step').addEventListener('click', () => goToStep(state.step + 1));
+
+    // --- CÁMARAS AUTOMÁTICAS Y CONTROL DE TAPA ---
     let targetCamPos = null;
     let targetLookAt = null;
+    const btnLid = document.getElementById('btn-lid');
+    const btnAutoRotate = document.getElementById('btn-autorotate');
 
     const cameraPresets = {
-      hero: { pos: new THREE.Vector3(0.3, 4.6, 5.4), target: new THREE.Vector3(0, 0.45, 0) },
+      hero: { pos: new THREE.Vector3(0.35, 4.6, 5.4), target: new THREE.Vector3(-0.25, 0.45, 0) },
       logo: { pos: new THREE.Vector3(0.15, 3.8, 3.6), target: new THREE.Vector3(0, 0.45, 0), closeLid: true },
       cookies: { pos: new THREE.Vector3(-1.35, 3.0, 2.35), target: new THREE.Vector3(-0.78, 0.25, 0), openLid: true },
       fruits: { pos: new THREE.Vector3(1.45, 3.0, 2.35), target: new THREE.Vector3(0.78, 0.25, 0), openLid: true }
     };
 
-    function focusCamera(viewKey) {
-      const preset = cameraPresets[viewKey];
+    function setLidState(open) {
+      state.lidOpen = open;
+      targetLidAngle = open ? -1.78 : 0;
+      btnLid.textContent = open ? '📦 Cerrar Caja' : '📦 Abrir Caja';
+    }
+
+    function focusCamera(viewName) {
+      const preset = cameraPresets[viewName];
       if (!preset) return;
+
+      document.querySelectorAll('.cam-btn[data-view]').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.view === viewName);
+      });
+
       if (preset.closeLid) setLidState(false);
       if (preset.openLid) setLidState(true);
+
+      const isMobile = document.body.classList.contains('mobile-mode');
       targetCamPos = preset.pos.clone();
       targetLookAt = preset.target.clone();
-
-      document.querySelectorAll('.cam-btn[data-view]').forEach(b => {
-        b.classList.toggle('active', b.dataset.view === viewKey);
-      });
-    }
-
-    // --- NAVEGACIÓN GUIADA EN 3 PASOS ---
-    function setWizardStep(stepNum) {
-      state.step = stepNum;
-
-      document.querySelectorAll('.step-tab').forEach(tab => {
-        const s = Number(tab.dataset.step);
-        tab.classList.toggle('active', s === stepNum);
-        tab.classList.toggle('completed', s < stepNum);
-      });
-
-      document.querySelectorAll('.step-pane').forEach(pane => {
-        pane.classList.toggle('active', pane.id === `step-pane-${stepNum}`);
-      });
-
-      const pct = stepNum === 1 ? '33.33%' : stepNum === 2 ? '66.66%' : '100%';
-      document.getElementById('wizard-progress-fill').style.width = pct;
-
-      const btnPrev = document.getElementById('btn-prev-step');
-      const btnNext = document.getElementById('btn-next-step');
-      const footerBadge = document.getElementById('footer-price-badge');
-
-      if (stepNum === 1) {
-        btnPrev.style.display = 'none';
-        footerBadge.style.display = 'block';
-        btnNext.style.display = 'block';
-        btnNext.textContent = 'Siguiente: Plan y Recojo →';
-      } else if (stepNum === 2) {
-        btnPrev.style.display = 'inline-block';
-        footerBadge.style.display = 'none';
-        btnNext.style.display = 'block';
-        btnNext.textContent = 'Siguiente: Resumen y Pago →';
-        focusCamera('hero');
-      } else {
-        btnPrev.style.display = 'inline-block';
-        footerBadge.style.display = 'none';
-        btnNext.style.display = 'none';
-        focusCamera('hero');
+      if (isMobile && viewName === 'hero') {
+        targetLookAt.x = 0;
       }
     }
 
-    document.querySelectorAll('.step-tab').forEach(tab => {
-      tab.addEventListener('click', () => setWizardStep(Number(tab.dataset.step)));
+    document.querySelectorAll('.cam-btn[data-view]').forEach(btn => {
+      btn.addEventListener('click', () => focusCamera(btn.dataset.view));
     });
 
-    document.getElementById('btn-prev-step').addEventListener('click', () => {
-      if (state.step > 1) setWizardStep(state.step - 1);
+    btnLid.addEventListener('click', () => setLidState(!state.lidOpen));
+
+    btnAutoRotate.addEventListener('click', () => {
+      state.autoRotate = !state.autoRotate;
+      controls.autoRotate = state.autoRotate;
+      controls.autoRotateSpeed = 1.6;
+      btnAutoRotate.classList.toggle('active', state.autoRotate);
     });
 
-    document.getElementById('btn-next-step').addEventListener('click', () => {
-      if (state.step < 3) setWizardStep(state.step + 1);
+    controls.addEventListener('start', () => {
+      targetCamPos = null;
+      targetLookAt = null;
     });
 
-    document.getElementById('btn-jump-pay').addEventListener('click', () => setWizardStep(3));
-
-    // --- ACTUALIZACIÓN DE UI, NUTRICIÓN, PRECIOS Y ENLACES (994 013 003) ---
+    // --- ACTUALIZACIÓN DINÁMICA DE PRECIOS, NUTRICIÓN Y PEDIDO ---
     function updateUI() {
-      const info = nutritionData[state.mix];
-      const extraIron = state.drink ? 5 : 0;
-      const extraVitC = state.drink ? 12 : 0;
-      const totalIron = Math.min(100, info.iron + extraIron);
-      const totalVitC = Math.min(100, info.vitc + extraVitC);
-
-      const baseUnit = state.topping === 'cacao' ? 5.50 : 5.00;
-      const unitWithDrink = baseUnit + (state.drink ? 2.50 : 0);
+      const baseUnit = 5.00;
+      const drinkExtra = state.drink ? 2.50 : 0;
+      const unitWithDrink = baseUnit + drinkExtra;
       const weeklyTotal = (unitWithDrink * 5) - 1.00;
 
-      document.getElementById('plan-daily-hint').textContent = `S/ ${unitWithDrink.toFixed(2)} • Hoy`;
-      document.getElementById('plan-weekly-hint').textContent = `S/ ${weeklyTotal.toFixed(2)} (S/ ${(weeklyTotal / 5).toFixed(2)}/d)`;
+      document.getElementById('plan-unit-desc').textContent = `S/ ${unitWithDrink.toFixed(2)} • Compra por hoy`;
+      document.getElementById('plan-week-desc').textContent = `S/ ${weeklyTotal.toFixed(2)} • Lun a Vie (-S/ 1)`;
 
-      let priceText, priceSubText, planLabel;
-      if (state.plan === 'individual') {
-        priceText = `S/ ${unitWithDrink.toFixed(2)}`;
-        priceSubText = 'Pack Diario';
-        planLabel = 'Pack Diario (1 día)';
-      } else {
-        priceText = `S/ ${weeklyTotal.toFixed(2)}`;
-        priceSubText = '5 días (Lun-Vie)';
-        planLabel = 'Plan Semanal (5 días Lun-Vie)';
-      }
+      const info = nutritionData[state.mix];
+      const toppingIronBonus = state.topping === 'semillas' ? 4 : (state.topping === 'cacao' ? 3 : 0);
+      const totalIron = Math.min(100, info.iron + toppingIronBonus + (state.drink ? 4 : 0));
+      const totalVitC = Math.min(100, info.vitc + (state.drink ? 18 : 0));
 
-      // Resumen PC derecho y Footer
-      document.getElementById('pc-summary-title').textContent = `${info.name} + ${toppingNames[state.topping]}`;
-      document.getElementById('pc-price-display').textContent = priceText;
-      document.getElementById('pc-price-sub').textContent = priceSubText;
-      document.getElementById('footer-price-badge').textContent = `Total: ${priceText}`;
+      const priceText = state.plan === 'individual' ? `S/ ${unitWithDrink.toFixed(2)}` : `S/ ${weeklyTotal.toFixed(2)}`;
+      const planLabel = state.plan === 'individual' ? 'Pack Diario (1 día)' : 'Plan Semanal (5 días Lun-Vie)';
 
-      // Barras nutricionales (sincronizadas en Paso 2 y Resumen PC)
-      document.querySelectorAll('.iron-val-text').forEach(el => el.textContent = `${totalIron}% VDR`);
-      document.querySelectorAll('.iron-bar-fill').forEach(el => el.style.width = `${totalIron}%`);
-      document.querySelectorAll('.vitc-val-text').forEach(el => el.textContent = `${totalVitC}% VDR`);
-      document.querySelectorAll('.vitc-bar-fill').forEach(el => el.style.width = `${totalVitC}%`);
-      document.querySelectorAll('.energy-val-text').forEach(el => el.textContent = state.drink ? '360 kcal (3.5h)' : info.kcal);
-      document.querySelectorAll('.energy-bar-fill').forEach(el => el.style.width = `${state.drink ? 86 : info.energyPct}%`);
-      document.querySelectorAll('.synergy-note-text').forEach(el => el.innerHTML = info.note);
+      document.getElementById('footer-price').textContent = priceText;
+      document.getElementById('footer-plan-label').textContent = planLabel;
+
+      document.getElementById('iron-val').textContent = `${totalIron}% VDR`;
+      document.getElementById('iron-bar').style.width = `${totalIron}%`;
+      document.getElementById('vitc-val').textContent = `${totalVitC}% VDR`;
+      document.getElementById('vitc-bar').style.width = `${totalVitC}%`;
+      document.getElementById('energy-val').textContent = state.drink ? '360 kcal (3.5h)' : info.kcal;
+      document.getElementById('energy-bar').style.width = `${state.drink ? 86 : info.energyPct}%`;
+      document.getElementById('synergy-text').innerHTML = info.note;
 
       const pickup = document.getElementById('pickup-point').value;
-      document.getElementById('pc-pickup-label').textContent = pickup;
-
-      // Mini-boleta Paso 3
       document.getElementById('rec-plan').textContent = planLabel;
       document.getElementById('rec-cookies').textContent = `${shapeNames[state.shape]} • ${toppingNames[state.topping]}`;
       document.getElementById('rec-fruits').textContent = info.name;
-      document.getElementById('rec-drink').textContent = state.drink ? 'Infusión Aguaymanto & Camu' : 'Sin bebida adicional';
+      document.getElementById('rec-drink').textContent = state.drink ? 'Infusión Aguaymanto & Camu' : 'No incluida';
       document.getElementById('rec-pickup').textContent = pickup;
       document.getElementById('rec-total').textContent = priceText;
-      document.getElementById('yape-modal-amount').textContent = priceText;
+      document.getElementById('yape-amount-text').textContent = priceText;
 
-      // Enlaces WhatsApp al número oficial 994 013 003
       const waOrderMsg = encodeURIComponent(
         `¡Hola NUTIVA! Quiero confirmar mi pedido express (PMV Final):\n` +
         `• Modalidad: ${planLabel}\n` +
@@ -2896,60 +2772,20 @@
         `• Punto de Recojo Campus (10-15 min): ${pickup}\n` +
         `• Total: ${priceText}`
       );
-      document.getElementById('wa-order-btn').href = `https://wa.me/51994013003?text=${waOrderMsg}`;
+      document.getElementById('wa-order-btn').href = `https://wa.me/51902182049?text=${waOrderMsg}`;
 
       const yapeConfirmMsg = encodeURIComponent(
-        `¡Hola NUTIVA! Acabo de realizar mi pago por Yape al 994 013 003:\n` +
+        `¡Hola NUTIVA! Acabo de realizar mi pago por Yape al +51 902 182 049:\n` +
         `• Monto yapeado: ${priceText}\n` +
         `• Pedido: ${planLabel} | Galletas ${shapeNames[state.shape]} (${toppingNames[state.topping]}) + ${info.name}${state.drink ? ' + Infusión' : ''}\n` +
         `• Punto de Recojo Campus: ${pickup}\n` +
         `Adjunto mi captura de pantalla:`
       );
-      document.getElementById('yape-confirm-wa-btn').href = `https://wa.me/51994013003?text=${yapeConfirmMsg}`;
+      document.getElementById('yape-confirm-wa-btn').href = `https://wa.me/51902182049?text=${yapeConfirmMsg}`;
     }
 
-    // --- VISTA RESPONSIVA (PC / MÓVIL) ---
-    function updateRendererViewport() {
-      const rect = container.getBoundingClientRect();
-      if (rect.width > 0 && rect.height > 0) {
-        camera.aspect = rect.width / rect.height;
-        camera.updateProjectionMatrix();
-        renderer.setSize(rect.width, rect.height);
-      }
-    }
-
-    function applyViewMode(mode) {
-      state.viewMode = mode;
-      const isNarrowScreen = window.innerWidth <= 860;
-
-      if (mode === 'mobile' || isNarrowScreen) {
-        document.body.classList.add('mobile-mode');
-        document.body.classList.toggle('desktop-sim', !isNarrowScreen);
-      } else {
-        document.body.classList.remove('mobile-mode', 'desktop-sim');
-      }
-
-      document.querySelectorAll('[data-view-mode]').forEach(btn => {
-        btn.classList.toggle('active', btn.dataset.viewMode === mode);
-      });
-
-      requestAnimationFrame(updateRendererViewport);
-    }
-
-    document.querySelectorAll('[data-bg-val]').forEach(btn => {
-      btn.addEventListener('click', () => applyBackground(btn.dataset.bgVal));
-    });
-
-    document.querySelectorAll('[data-theme-val]').forEach(btn => {
-      btn.addEventListener('click', () => applyTheme(btn.dataset.themeVal));
-    });
-
-    document.querySelectorAll('[data-view-mode]').forEach(btn => {
-      btn.addEventListener('click', () => applyViewMode(btn.dataset.viewMode));
-    });
-
-    // --- EVENTOS DE PERSONALIZACIÓN CON ZOOM AUTOMÁTICO ---
-    document.querySelectorAll('#shape-options .option-card').forEach((card) => {
+    // --- LISTENERS DE PERSONALIZACIÓN DE PRODUCTO ---
+    document.querySelectorAll('#shape-options .option-card').forEach(card => {
       card.addEventListener('click', () => {
         document.querySelectorAll('#shape-options .option-card').forEach(c => c.classList.remove('selected'));
         card.classList.add('selected');
@@ -2960,7 +2796,7 @@
       });
     });
 
-    document.querySelectorAll('#fruit-options .option-card').forEach((card) => {
+    document.querySelectorAll('#fruit-options .option-card').forEach(card => {
       card.addEventListener('click', () => {
         document.querySelectorAll('#fruit-options .option-card').forEach(c => c.classList.remove('selected'));
         card.classList.add('selected');
@@ -2971,7 +2807,7 @@
       });
     });
 
-    document.querySelectorAll('#topping-options .option-row').forEach((row) => {
+    document.querySelectorAll('#topping-options .option-row').forEach(row => {
       row.addEventListener('click', () => {
         document.querySelectorAll('#topping-options .option-row').forEach(r => r.classList.remove('selected'));
         row.classList.add('selected');
@@ -2982,12 +2818,30 @@
       });
     });
 
+    const drinkToggle = document.getElementById('drink-toggle');
+    drinkToggle.addEventListener('click', () => {
+      state.drink = !state.drink;
+      drinkToggle.classList.toggle('active', state.drink);
+      if (state.drink) bottleGroup.visible = true;
+      focusCamera('hero');
+      updateUI();
+    });
+
+    document.querySelectorAll('#plan-options .option-card').forEach(card => {
+      card.addEventListener('click', () => {
+        document.querySelectorAll('#plan-options .option-card').forEach(c => c.classList.remove('selected'));
+        card.classList.add('selected');
+        state.plan = card.dataset.plan;
+        updateUI();
+      });
+    });
+
     const editionLabels = {
       clasica: 'NUTRIPACK EXPRESS • RECOJO RÁPIDO',
       origen: '100% ARTESANAL • ORIGEN HUANCAYO'
     };
 
-    document.querySelectorAll('#edition-options .option-card').forEach((card) => {
+    document.querySelectorAll('#edition-options .option-card').forEach(card => {
       card.addEventListener('click', () => {
         document.querySelectorAll('#edition-options .option-card').forEach(c => c.classList.remove('selected'));
         card.classList.add('selected');
@@ -2997,66 +2851,20 @@
       });
     });
 
-    document.querySelectorAll('#plan-switcher .plan-btn').forEach((btn) => {
-      btn.addEventListener('click', () => {
-        document.querySelectorAll('#plan-switcher .plan-btn').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        state.plan = btn.dataset.plan;
-        updateUI();
-      });
-    });
-
     document.getElementById('pickup-point').addEventListener('change', updateUI);
 
-    const drinkToggle = document.getElementById('drink-toggle');
-    drinkToggle.addEventListener('click', () => {
-      state.drink = !state.drink;
-      drinkToggle.classList.toggle('active', state.drink);
-      if (state.drink) {
-        bottleGroup.visible = true;
-        focusCamera('hero');
-      }
-      updateUI();
-    });
-
-    // --- TAPA Y BARRA INFERIOR DE VISTAS LIBRES ---
-    const btnLid = document.getElementById('btn-lid');
-    function setLidState(open) {
-      state.lidOpen = open;
-      targetLidAngle = state.lidOpen ? -1.78 : 0.015;
-      btnLid.textContent = state.lidOpen ? '📦 Cerrar Caja' : '📂 Abrir Caja';
-    }
-    btnLid.addEventListener('click', () => setLidState(!state.lidOpen));
-
-    document.querySelectorAll('.cam-btn[data-view]').forEach((btn) => {
-      btn.addEventListener('click', () => focusCamera(btn.dataset.view));
-    });
-
-    const btnAutoRotate = document.getElementById('btn-autorotate');
-    btnAutoRotate.addEventListener('click', () => {
-      state.autoRotate = !state.autoRotate;
-      controls.autoRotate = state.autoRotate;
-      controls.autoRotateSpeed = 1.6;
-      btnAutoRotate.classList.toggle('active', state.autoRotate);
-    });
-
-    // --- MODAL PAGO YAPE + COPIAR NÚMERO (994 013 003) ---
+    // --- MODALES Y COPIADO SEGURO ---
     const yapeModal = document.getElementById('yape-modal');
-    const btnCopyYape = document.getElementById('btn-copy-yape');
-
-    document.getElementById('btn-open-yape').addEventListener('click', () => {
-      yapeModal.classList.add('open');
-    });
-    document.getElementById('btn-close-yape').addEventListener('click', () => {
-      yapeModal.classList.remove('open');
-    });
+    document.getElementById('btn-open-yape').addEventListener('click', () => yapeModal.classList.add('open'));
+    document.getElementById('btn-close-yape').addEventListener('click', () => yapeModal.classList.remove('open'));
     yapeModal.addEventListener('click', (e) => {
       if (e.target === yapeModal) yapeModal.classList.remove('open');
     });
 
+    const btnCopyYape = document.getElementById('btn-copy-yape');
     btnCopyYape.addEventListener('click', () => {
       const tempInput = document.createElement('textarea');
-      tempInput.value = '994013003';
+      tempInput.value = '902182049';
       tempInput.style.position = 'fixed';
       tempInput.style.opacity = '0';
       document.body.appendChild(tempInput);
@@ -3070,38 +2878,34 @@
           btnCopyYape.classList.remove('copied');
         }, 2200);
       } catch (err) {
-        btnCopyYape.textContent = '994 013 003';
+        btnCopyYape.textContent = '+51 902 182 049';
       }
       document.body.removeChild(tempInput);
     });
 
-    // --- MODAL DE TRAZABILIDAD ---
     const traceModal = document.getElementById('traceability-modal');
     document.getElementById('btn-open-traceability').addEventListener('click', () => traceModal.classList.add('open'));
-    document.getElementById('btn-open-traceability-pc').addEventListener('click', () => traceModal.classList.add('open'));
     document.getElementById('btn-close-modal').addEventListener('click', () => traceModal.classList.remove('open'));
     traceModal.addEventListener('click', (e) => {
       if (e.target === traceModal) traceModal.classList.remove('open');
     });
 
-    // --- RESIZE RESPONSIVO ---
     window.addEventListener('resize', () => {
-      if (window.innerWidth <= 860 && state.viewMode !== 'mobile') {
-        applyViewMode('mobile');
-      } else {
-        updateRendererViewport();
+      if (window.innerWidth <= 820 && state.viewMode !== 'mobile') {
+        applyViewMode('mobile', false);
       }
+      syncRendererSize();
     });
 
-    // Inicialización completa
-    applyViewMode(state.viewMode);
+    // --- INICIO Y LOOP DE ANIMACIÓN ---
     updateUI();
-
     setTimeout(() => {
       const loader = document.getElementById('loader');
-      loader.style.opacity = '0';
-      setTimeout(() => loader.remove(), 400);
-    }, 350);
+      if (loader) {
+        loader.style.opacity = '0';
+        setTimeout(() => loader.remove(), 400);
+      }
+    }, 320);
 
     function animate() {
       requestAnimationFrame(animate);
